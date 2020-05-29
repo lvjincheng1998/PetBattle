@@ -1,0 +1,9 @@
+{
+  "ver": "1.0.8",
+  "uuid": "cebeda25-1c40-4e99-be11-563d5bec50a4",
+  "isPlugin": false,
+  "loadPluginInWeb": true,
+  "loadPluginInNative": true,
+  "loadPluginInEditor": false,
+  "subMetas": {}
+}

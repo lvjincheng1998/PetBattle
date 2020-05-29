@@ -1,0 +1,211 @@
+{
+    "P6004": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 41,
+            "frameEventIndexes": [21] 
+        },
+        "dead": {
+            "totalFrame": 49,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 25,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 50,
+            "frameEventIndexes": [6, 30] 
+        }
+    },
+    "P6005": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 40,
+            "frameEventIndexes": [22] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 73,
+            "frameEventIndexes": [48] 
+        }
+    },
+    "P6006": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 56,
+            "frameEventIndexes": [32] 
+        },
+        "dead": {
+            "totalFrame": 38,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 72,
+            "frameEventIndexes": [38] 
+        }
+    },
+    "P6017": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 40,
+            "frameEventIndexes": [34] 
+        },
+        "dead": {
+            "totalFrame": 37,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 23,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 72,
+            "frameEventIndexes": [46] 
+        }
+    },
+    "P6095": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 59,
+            "frameEventIndexes": [25] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 23,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 73,
+            "frameEventIndexes": [49] 
+        }
+    },
+    "P6104": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 45,
+            "frameEventIndexes": [23] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 22,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 61,
+            "frameEventIndexes": [40] 
+        }
+    },
+    "P6113": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 45,
+            "frameEventIndexes": [24] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 66,
+            "frameEventIndexes": [29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49] 
+        }
+    },
+    "P6115": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 44,
+            "frameEventIndexes": [20] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 74,
+            "frameEventIndexes": [40] 
+        }
+    },
+    "P6131": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 52,
+            "frameEventIndexes": [35] 
+        },
+        "dead": {
+            "totalFrame": 40,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 23,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 68,
+            "frameEventIndexes": [45] 
+        }
+    },
+    "P6133": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 47,
+            "frameEventIndexes": [28] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 79,
+            "frameEventIndexes": [34, 41, 48, 55, 62] 
+        }
+    },
+    "P6140": {
+        "frameRate": 30,
+        "attack": {
+            "totalFrame": 41,
+            "frameEventIndexes": [20] 
+        },
+        "dead": {
+            "totalFrame": 39,
+            "frameEventIndexes": [] 
+        },
+        "hurt": {
+            "totalFrame": 23,
+            "frameEventIndexes": [] 
+        },
+        "skill": {
+            "totalFrame": 63,
+            "frameEventIndexes": [40] 
+        }
+    }
+}

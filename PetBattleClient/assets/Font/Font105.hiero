@@ -1,0 +1,36 @@
+font.name=华文行楷
+font.size=64
+font.bold=true
+font.italic=false
+font.gamma=1.8
+font.mono=false
+
+font2.file=
+font2.use=false
+
+pad.top=1
+pad.right=1
+pad.bottom=1
+pad.left=1
+pad.advance.x=-2
+pad.advance.y=-2
+
+glyph.native.rendering=false
+glyph.page.width=512
+glyph.page.height=512
+glyph.text=击败、平局
+
+render_type=0
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.GradientEffect
+effect.Top color=0000ff
+effect.Bottom color=00ffff
+effect.Offset=0
+effect.Scale=1.0
+effect.Cyclic=false
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.OutlineEffect
+effect.Color=ffffff
+effect.Width=2.0
+effect.Join=2
+

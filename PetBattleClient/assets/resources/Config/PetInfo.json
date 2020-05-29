@@ -1,0 +1,365 @@
+[
+    {
+        "id": 6004,
+        "name": "小火龙",
+        "rarity": "R",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6005,
+        "name": "火恐龙",
+        "rarity": "SR",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6006,
+        "name": "喷火龙",
+        "rarity": "SSR",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6017,
+        "name": "雷丘",
+        "rarity": "SSR",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6095,
+        "name": "超梦",
+        "rarity": "SP",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "迷幻一击（普攻）",
+                "explain": "使用瞬身攻击敌方，对敌方造成攻击100%伤害。",
+                "energy": 0
+            },
+            {
+                "name": "森罗万象（必杀）",
+                "explain": "短暂蓄能后在手中汇聚一个压缩超能球，并投掷到敌方阵营，对单个目标造成263%伤害，如果该目标被击杀，溢出的伤害将会溅射到其余目标。",
+                "energy": 3
+            },
+            {
+                "name": "未来之眼（被动）",
+                "explain": "发动森罗万象时，有30%固定概率触发潜能爆发。",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6104,
+        "name": "九尾狐",
+        "rarity": "SSR",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6113,
+        "name": "化石翼龙",
+        "rarity": "SP",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6115,
+        "name": "时拉比",
+        "rarity": "SP",
+        "department": "自然",
+        "status": {
+            "hp": 1323,
+            "attack": 109,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 5,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "自然之力（普攻）",
+                "explain": "发动自然之力，攻击敌人，造成攻击100%伤害，造成的真实伤害将治愈己方生命值最低的单位。",
+                "energy": 0
+            },
+            {
+                "name": "自然风暴（必杀）",
+                "explain": "恢复全体队友大量生命，恢复施术者生命上限12%的生命值。",
+                "energy": 3
+            },
+            {
+                "name": "自然庇护（被动）",
+                "explain": "回合开始时，复活一名队友，恢复施术者生命上限20%的生命值,冷却3回合。",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6131,
+        "name": "盖欧卡",
+        "rarity": "SSR",
+        "department": "水",
+        "status": {
+            "hp": 1035,
+            "attack": 142,
+            "defend": 68,
+            "speed": 111,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "浪潮（普攻）",
+                "explain": "推动水浪，对敌方造成50%伤害。",
+                "energy": 0
+            },
+            {
+                "name": "吞噬（必杀）",
+                "explain": "聚集水之力，吞噬敌方全体，造成150%伤害。",
+                "energy": 3
+            },
+            {
+                "name": "逐流（被动）",
+                "explain": "战斗开始时，发动水之领域，提高自身30%防御，持续3回合。",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6133,
+        "name": "水君",
+        "rarity": "SSR",
+        "department": "水",
+        "status": {
+            "hp": 982,
+            "attack": 145,
+            "defend": 71,
+            "speed": 109,
+            "critRate": 8,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0
+        },
+        "skills": [
+            {
+                "name": "冰之冲击（普攻）",
+                "explain": "化身为冰弹攻击敌人，造成攻击60%伤害，并有5%基础概率冻结敌方一回合。",
+                "energy": 0
+            },
+            {
+                "name": "冰之喷射（必杀）",
+                "explain": "持续喷出冰泉攻击敌方5次，每次造成攻击30%伤害，并有8%基础概率冻结敌方一回合。",
+                "energy": 3
+            },
+            {
+                "name": "冰之守护（被动）",
+                "explain": "回合结束时，有50%固定概率获得护盾，能吸收6%生命上限的伤害。",
+                "energy": 0
+            }
+        ]
+    },
+    {
+        "id": 6140,
+        "name": "裂空座",
+        "rarity": "SP",
+        "department": "超能",
+        "status": {
+            "hp": 960,
+            "attack": 162,
+            "defend": 68,
+            "speed": 112,
+            "critRate": 10,
+            "critHurt": 150,
+            "hit": 0,
+            "resist": 0 
+        },
+        "skills": [
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 3
+            },
+            {
+                "name": "技能名称(正在策划)",
+                "explain": "技能说明(正在策划)",
+                "energy": 0
+            }
+        ]
+    }
+]

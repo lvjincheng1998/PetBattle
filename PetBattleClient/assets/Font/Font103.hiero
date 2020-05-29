@@ -1,0 +1,31 @@
+font.name=隶书
+font.size=32
+font.bold=true
+font.italic=false
+font.gamma=1.8
+font.mono=false
+
+font2.file=
+font2.use=false
+
+pad.top=1
+pad.right=1
+pad.bottom=1
+pad.left=1
+pad.advance.x=-2
+pad.advance.y=-2
+
+glyph.native.rendering=false
+glyph.page.width=512
+glyph.page.height=512
+glyph.text=携带数量:1234567890/+排序等级稀有度战斗力属性技能生命攻击防御速度暴击率暴击伤害命中效果效果抵抗升级血统突破装备消耗\n距离自动刷新小时分秒拥有件\n·背包\n全部、消耗品、材料\n出售、使用\n道具数量:1234567890/\n·精灵\n详情、升级、血统、突破、装备\n自动升级、培养、自动培养、突破、卸下\n·装备\n全部、护目、手镯、头饰、项链、尖牙、星石\n装备数量 1234567890%/\n·装备信息\n普通、高级、特级\n星痕等级:\n强化等级:\n主属性、副属性+1234567890\n强化、进阶、洗炼、出售\n·阵型\n已上阵\n战斗力:1234567890\n·商城\n正在刷新\n道具、剩余次数：、购买\n小火龙、火恐龙、喷火龙、雷丘、超梦、九尾狐、化石翼龙、时拉比、盖欧卡、水君、裂空座\n普通便当、高级便当、豪华便当、特制便当、玲珑石、突破石、强化石、星痕碎片、溶解药水、重塑药水\n·扭蛋机\n确定、扭一次\n·对战\n正在搜索对手... 准备开始 ()- 返回\n·副本\n玲珑塔、武斗场、元武库、挑战、消耗、挑战奖励、X\n·排行榜\n阵容实力、对战积分\n
+
+render_type=0
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.GradientEffect
+effect.Top color=ffffcc
+effect.Bottom color=ffffff
+effect.Offset=0
+effect.Scale=1.0
+effect.Cyclic=false
+

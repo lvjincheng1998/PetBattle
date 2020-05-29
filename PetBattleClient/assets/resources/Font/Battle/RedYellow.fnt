@@ -1,0 +1,11 @@
+info face="»ªÎÄçúçê" size=40 bold=1 italic=1 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
+common lineHeight=42 base=32 scaleW=512 scaleH=512 pages=1 packed=0
+page id=0 file="RedYellow.png"
+chars count=6
+char id=0       x=0    y=0    width=0    height=0    xoffset=-1   yoffset=0    xadvance=42   page=0    chnl=0 
+char id=32      x=0    y=0    width=0    height=0    xoffset=-1   yoffset=0    xadvance=12   page=0    chnl=0 
+char id=20260   x=41   y=0    width=48   height=40   xoffset=4    yoffset=0    xadvance=42   page=0    chnl=0 
+char id=23475   x=89   y=0    width=46   height=40   xoffset=3    yoffset=0    xadvance=42   page=0    chnl=0 
+char id=24635   x=0    y=0    width=41   height=40   xoffset=1    yoffset=0    xadvance=42   page=0    chnl=0 
+char id=65306   x=135  y=0    width=17   height=32   xoffset=5    yoffset=4    xadvance=42   page=0    chnl=0 
+kernings count=0

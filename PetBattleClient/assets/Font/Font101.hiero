@@ -1,0 +1,31 @@
+font.name=隶书
+font.size=24
+font.bold=true
+font.italic=false
+font.gamma=1.8
+font.mono=false
+
+font2.file=
+font2.use=false
+
+pad.top=1
+pad.right=1
+pad.bottom=1
+pad.left=1
+pad.advance.x=-2
+pad.advance.y=-2
+
+glyph.native.rendering=false
+glyph.page.width=512
+glyph.page.height=512
+glyph.text=1234567890
+
+render_type=0
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.GradientEffect
+effect.Top color=00ffff
+effect.Bottom color=ffffff
+effect.Offset=0
+effect.Scale=1.0
+effect.Cyclic=false
+

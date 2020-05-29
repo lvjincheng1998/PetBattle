@@ -1,0 +1,141 @@
+{
+    "A6004": {
+        "frameRate": 60,
+        "storage": {
+            "totalFrame": 24,
+            "frameEventIndexes": [] 
+        },
+        "explode": {
+            "totalFrame": 24,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "A6005": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 16,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "A6006": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 52,
+            "frameEventIndexes": [28] 
+        }
+    },
+    "A6017": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 28,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "A6095": {
+        "frameRate": 60,
+        "down": {
+            "totalFrame": 36,
+            "frameEventIndexes": [] 
+        },
+        "hit": {
+            "totalFrame": 16,
+            "frameEventIndexes": [6] 
+        }
+    },
+    "A6104": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 16,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "A6113": {
+        "frameRate": 60,
+        "track": {
+            "totalFrame": 28,
+            "frameEventIndexes": [16] 
+        },
+        "hit": {
+            "totalFrame": 16,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "A6115": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 28,
+            "frameEventIndexes": [12] 
+        },
+        "run": {
+            "totalFrame": 10,
+            "frameEventIndexes": [] 
+        }
+    },
+    "A6131": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 48,
+            "frameEventIndexes": [15] 
+        }
+    },
+    "A6140": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 16,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "S6005": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 56,
+            "frameEventIndexes": [4, 12, 20, 28, 36, 44] 
+        }
+    },
+    "S6006": {
+        "frameRate": 60,
+        "storage": {
+            "totalFrame": 68,
+            "frameEventIndexes": [] 
+        },
+        "hit": {
+            "totalFrame": 80,
+            "frameEventIndexes": [10, 20, 32, 44, 60] 
+        }
+    },
+    "S6095": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 32,
+            "frameEventIndexes": [16] 
+        }
+    },
+    "S6113": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 24,
+            "frameEventIndexes": [4] 
+        }
+    },
+    "S6131": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 32,
+            "frameEventIndexes": [8] 
+        }
+    },
+    "S6133": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 15,
+            "frameEventIndexes": [] 
+        }
+    },
+    "S6140": {
+        "frameRate": 60,
+        "hit": {
+            "totalFrame": 96,
+            "frameEventIndexes": [4, 12, 16, 28, 29, 30, 42, 44, 58]
+        }
+    }
+}

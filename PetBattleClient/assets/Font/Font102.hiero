@@ -1,0 +1,44 @@
+font.name=方正粗黑宋简体
+font.size=40
+font.bold=true
+font.italic=false
+font.gamma=1.8
+font.mono=false
+
+font2.file=
+font2.use=false
+
+pad.top=1
+pad.right=1
+pad.bottom=1
+pad.left=1
+pad.advance.x=-2
+pad.advance.y=-2
+
+glyph.native.rendering=false
+glyph.page.width=512
+glyph.page.height=512
+glyph.text=背包、阵型、精灵、副本、商城、装备、图鉴、联盟、邮件、排行榜、好友、扭蛋机、对战、设置
+
+render_type=0
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.ShadowEffect
+effect.Color=000000
+effect.Opacity=0.6
+effect.X distance=2.0
+effect.Y distance=2.0
+effect.Blur kernel size=0
+effect.Blur passes=1
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.GradientEffect
+effect.Top color=ff0000
+effect.Bottom color=ffff00
+effect.Offset=0
+effect.Scale=1.0
+effect.Cyclic=false
+
+effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.OutlineEffect
+effect.Color=ffffff
+effect.Width=1.5
+effect.Join=2
+

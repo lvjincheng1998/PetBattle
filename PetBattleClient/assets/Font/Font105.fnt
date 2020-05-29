@@ -1,0 +1,12 @@
+info face="»ªÎÄÐÐ¿¬" size=64 bold=1 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
+common lineHeight=71 base=52 scaleW=512 scaleH=512 pages=1 packed=0
+page id=0 file="Font105.png"
+chars count=7
+char id=0       x=0    y=0    width=0    height=0    xoffset=-1   yoffset=0    xadvance=68   page=0    chnl=0 
+char id=32      x=0    y=0    width=0    height=0    xoffset=-1   yoffset=0    xadvance=20   page=0    chnl=0 
+char id=12289   x=218  y=0    width=17   height=15   xoffset=7    yoffset=41   xadvance=68   page=0    chnl=0 
+char id=20987   x=0    y=0    width=56   height=60   xoffset=5    yoffset=3    xadvance=68   page=0    chnl=0 
+char id=23616   x=106  y=0    width=54   height=58   xoffset=5    yoffset=4    xadvance=68   page=0    chnl=0 
+char id=24179   x=56   y=0    width=50   height=59   xoffset=9    yoffset=5    xadvance=68   page=0    chnl=0 
+char id=36133   x=160  y=0    width=58   height=49   xoffset=9    yoffset=8    xadvance=68   page=0    chnl=0 
+kernings count=0

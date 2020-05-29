@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1001,
+        "name": "普通便当",
+        "rarity": "R",
+        "classify": "消耗品",
+        "introduce": "便当在大陆大部分地区习惯称为“盒饭”，即盒装餐食。\n作用：精灵经验+100。"
+    },
+    {
+        "id": 1002,
+        "name": "高级便当",
+        "rarity": "SR",
+        "classify": "消耗品",
+        "introduce": "便当在大陆大部分地区习惯称为“盒饭”，即盒装餐食。\n作用：精灵经验+1000。"
+    },
+    {
+        "id": 1003,
+        "name": "豪华便当",
+        "rarity": "SSR",
+        "classify": "消耗品",
+        "introduce": "便当在大陆大部分地区习惯称为“盒饭”，即盒装餐食。\n作用：精灵经验+10000。"
+    },
+    {
+        "id": 1004,
+        "name": "特制便当",
+        "rarity": "SP",
+        "classify": "消耗品",
+        "introduce": "便当在大陆大部分地区习惯称为“盒饭”，即盒装餐食。\n作用：精灵经验+100000。"
+    },
+    {
+        "id": 1011,
+        "name": "玲珑石",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "玲珑石产于马鞍山中。马鞍山所产之石与众不同,举世独夺,又名玲珑石。\n作用：提升精灵血统。"
+    },
+    {
+        "id": 1021,
+        "name": "突破石",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "蕴含着神奇能量的黄色陨石。\n作用：精灵突破。"
+    },
+    {
+        "id": 2001,
+        "name": "强化石",
+        "rarity": "R",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2002,
+        "name": "强化石",
+        "rarity": "R",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2003,
+        "name": "强化石",
+        "rarity": "R",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2011,
+        "name": "强化石",
+        "rarity": "SR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2012,
+        "name": "强化石",
+        "rarity": "SR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2013,
+        "name": "强化石",
+        "rarity": "SR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2021,
+        "name": "强化石",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2022,
+        "name": "强化石",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2023,
+        "name": "强化石",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "珍贵的锻造材料。\n作用：强化装备。"
+    },
+    {
+        "id": 2031,
+        "name": "星痕碎片",
+        "rarity": "R",
+        "classify": "材料",
+        "introduce": "来自异世界的位面碎片。\n作用：提升装备星级。"
+    },
+    {
+        "id": 2032,
+        "name": "星痕碎片",
+        "rarity": "SR",
+        "classify": "材料",
+        "introduce": "来自异世界的位面碎片。\n作用：提升装备星级。"
+    },
+    {
+        "id": 2033,
+        "name": "星痕碎片",
+        "rarity": "SSR",
+        "classify": "材料",
+        "introduce": "来自异世界的位面碎片。\n作用：提升装备星级。"
+    },
+    {
+        "id": 2041,
+        "name": "溶解药水",
+        "rarity": "SSR",
+        "classify": "消耗品",
+        "introduce": "强力的溶解剂。\n作用：洗炼装备属性。"
+    },
+    {
+        "id": 2042,
+        "name": "重塑药水",
+        "rarity": "SSR",
+        "classify": "消耗品",
+        "introduce": "强力的塑形剂。\n作用：洗炼装备属性。"
+    }
+]
