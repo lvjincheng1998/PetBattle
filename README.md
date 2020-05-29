@@ -8,6 +8,7 @@
 
 ### 客户端说明
 使用Cocos Creator-2.3.3打开项目PetBattleClient。
+找到LoginMgr.ts文件，修改连接后台的URL。
 
 ### 服务端说明
 推荐使用Eclipse打开项目PetBattleServer。
