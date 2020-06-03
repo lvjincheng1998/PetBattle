@@ -1,10 +1,10 @@
 package controller;
 
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 import bean.UserInfo;
 import bean.UserLogin;
 import game.Player;
+import pers.jc.engine.JCManager;
 import pers.jc.mvc.Controller;
 import pers.jc.sql.CURD;
 import pers.jc.sql.SQL;
@@ -14,9 +14,13 @@ import result.RequestResult;
 
 @Controller
 public class UserController {
-	public static ConcurrentHashMap<Integer, Player> userMapper = new ConcurrentHashMap<Integer, Player>();
 	
 	public static RequestResult login(Player player, String username, String password) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		RequestResult requestResult = new RequestResult();
 		UserLogin userLogin = CURD.selectOne(UserLogin.class, new SQL(){{
 			WHERE("username=" + PARAM(username));
@@ -36,11 +40,11 @@ public class UserController {
 			requestResult.setMsg("用户信息获取失败");
 		} else {
 			synchronized ("login") {
-				Player user = userMapper.get(userInfo.getId());
+				Player user = (Player) JCManager.getEntityById(userInfo.getId());
 				if (user == null) {
 					player.id = userInfo.getId();
 					player.userInfo = userInfo;
-					userMapper.put(player.id, player);
+					JCManager.addEntity(player);
 					requestResult.setCode(200);
 					requestResult.setData(userInfo);
 					requestResult.setMsg("登录成功");
@@ -62,14 +66,6 @@ public class UserController {
 			requestResult.setMsg("该账号已被注册");
 			return requestResult;
 		}
-		String[] avatarUrls = new String[] {
-			"http://118.89.184.186:888/avatar/cartoon/boy/1.jpg",
-			"http://118.89.184.186:888/avatar/cartoon/boy/2.jpg",
-			"http://118.89.184.186:888/avatar/cartoon/boy/3.jpg",
-			"http://118.89.184.186:888/avatar/cartoon/girl/1.jpg",
-			"http://118.89.184.186:888/avatar/cartoon/girl/2.jpg",
-			"http://118.89.184.186:888/avatar/cartoon/girl/3.jpg",
-		};
 		UserInfo user_info = new UserInfo();
 		new Transaction() {
 			@Override
@@ -80,7 +76,13 @@ public class UserController {
 				insertAndGenerateKeys(user_login);
 				user_info.setId(user_login.getId());
 				user_info.setNickname("玩家" + user_login.getId());
-				user_info.setAvatarUrl(avatarUrls[new Random().nextInt(avatarUrls.length)]);
+				if (new Random().nextInt(100) < 50) {
+					user_info.setGender(1);
+					user_info.setAvatarUrl("Texture/Icon/HeadPhoto/6901");
+				} else {
+					user_info.setGender(2);
+					user_info.setAvatarUrl("Texture/Icon/HeadPhoto/6902");
+				}
 				insert(user_info);
 				commit();
 			}

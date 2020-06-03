@@ -20,6 +20,8 @@ public class UserInfo implements Cloneable {
 	private int diamond = 100000;
 	@Column
 	private int strength = 100;
+	@Column
+	private int integral = 1000;
 	public int getId() {
 		return id;
 	}
@@ -61,6 +63,12 @@ public class UserInfo implements Cloneable {
 	}
 	public void setStrength(int strength) {
 		this.strength = strength;
+	}
+	public int getIntegral() {
+		return integral;
+	}
+	public void setIntegral(int integral) {
+		this.integral = integral;
 	}
 	@Override
 	public Object clone() {

@@ -29,7 +29,6 @@ export default class NewClass extends cc.Component {
         this.checkRemember();
 
         let url = "ws://192.168.101.14:9999/petBattleServer";
-        // let url = "ws://118.89.184.186:9999/petBattleServer";
         JCEngine.boot(url, Player);
 
         //if local test, suport input username and password by q or w
@@ -113,7 +112,7 @@ export default class NewClass extends cc.Component {
                 } 
                 Camper.getInstance().showToast(res.msg);
             });
-            Camper.getInstance().showLoading("登录中");
+            Camper.getInstance().showLoading("登录中",  true);
         } else {
             this.isLoginPanel = true;
             this.input_password2.node.parent.active = false;
@@ -162,7 +161,7 @@ export default class NewClass extends cc.Component {
                 Camper.getInstance().hideLoading();
                 Camper.getInstance().showToast(res.msg);
             });
-            Camper.getInstance().showLoading("注册中");
+            Camper.getInstance().showLoading("注册中", true);
         }
     }
 }

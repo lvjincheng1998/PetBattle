@@ -5,6 +5,8 @@ import bean.UserInfo;
 import bean.UserPet;
 import game.Player;
 import pers.jc.mvc.Controller;
+import pers.jc.sql.CURD;
+import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.GashaponResult;
 import result.RequestResult;
@@ -77,20 +79,34 @@ public class GashaponController {
 				pet_id = 6095;
 			}
 		}
-		UserPet userPet = new UserPet();
-		userPet.setUser_id(userInfo.getId());
-		userPet.setPet_id(pet_id);
+		int pet_id_copy = pet_id;
+		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+			WHERE("user_id=" + PARAM(userInfo.getId()));
+			WHERE("pet_id=" + PARAM(pet_id_copy));
+		}});
+		if (userPet == null) {
+			userPet = new UserPet();
+			userPet.setUser_id(userInfo.getId());
+			userPet.setPet_id(pet_id_copy);
+		} else {
+			userPet.setFragment(userPet.getFragment() + 1);
+		}
+		UserPet userPet_copy = userPet;
 		new Transaction() {
 			@Override
 			public void run() throws Exception {
 				update(userInfo);
-				insertAndGenerateKeys(userPet);
+				if (userPet_copy.getId() == 0) {
+					insertAndGenerateKeys(userPet_copy);
+				} else {
+					update(userPet_copy);
+				}
 				commit();
 			}
 			@Override
 			public void success() {
 				player.userInfo = userInfo;
-				GashaponResult gashaponResult = new GashaponResult(userInfo, userPet);
+				GashaponResult gashaponResult = new GashaponResult(userInfo, userPet_copy);
 				requestResult.setCode(200);
 				requestResult.setData(gashaponResult);
 				requestResult.setMsg("Å¤µ°³É¹¦");

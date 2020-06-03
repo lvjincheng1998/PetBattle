@@ -145,22 +145,19 @@ public class UserPetController {
 		return requestResult;
 	}
 	
-	public RequestResult breakUp(Player player, int user_pet_id, int[] userPetIds) {
+	public RequestResult breakUp(Player player, int user_pet_id) {
 		RequestResult requestResult = new RequestResult();
 		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
 			WHERE("id=" + user_pet_id);
 		}});
 		if (userPet == null) {
 			requestResult.setMsg("精灵不存在");
+		} else if (userPet.getFragment() <= 0) {
+			requestResult.setMsg("精灵碎片不足");
 		} else {
+			userPet.setFragment(userPet.getFragment() - 1);
 			UserInfo userInfo = (UserInfo) player.userInfo.clone();
 			userInfo.setCoin(userInfo.getCoin() - (userPet.getBreak_level() + 1) * 10000);
-			UserPet[] userPets = new UserPet[userPetIds.length];
-			for (int i = 0; i < userPets.length; i++) {
-				UserPet up = new UserPet();
-				up.setId(userPetIds[i]);
-				userPets[i] = up;
-			}
 			UserProp userProp = new UserProp();
 			userProp.setUser_id(player.userInfo.getId());
 			userProp.setProp_id(1021);
@@ -169,11 +166,8 @@ public class UserPetController {
 			new Transaction() {
 				@Override
 				public void run() throws Exception {
-					int updateCount1 = update(userInfo);
-					int updateCount2 = delete(userPets);
 					if (
-						updateCount1 == 1 &&
-						updateCount2 == userPets.length &&
+						update(userInfo) == 1 &&
 						UserPropController.subProp(this, userProp, requestResult)
 					) {
 						update(userPet);
@@ -186,7 +180,6 @@ public class UserPetController {
 					UserPetBreakUpResult userPetBreakUpResult = new UserPetBreakUpResult();
 					userPetBreakUpResult.setUserInfo(userInfo);
 					userPetBreakUpResult.setUserPet(userPet);
-					userPetBreakUpResult.setUserPets(userPets);
 					userPetBreakUpResult.setUserProp(userProp);
 					requestResult.setData(userPetBreakUpResult);
 					requestResult.setCode(200);

@@ -263,6 +263,10 @@ public class UserEquipmentController {
 		RequestResult requestResult = new RequestResult();
 		UserInfo userInfo = (UserInfo) player.userInfo.clone();
 		for (UserEquipment userEquipment : userEquipments) {
+			if (userEquipment.getUser_pet_id() > 0) {
+				requestResult.setMsg("已佩戴的装备无法出售");
+				return requestResult;
+			}
 			String rarity = getEquipmentRarityById(userEquipment.getEquipment_id());
 			if (rarity.equals("R")) {
 				userInfo.setCoin(userInfo.getCoin() + 1000);

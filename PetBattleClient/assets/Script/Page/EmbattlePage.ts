@@ -117,7 +117,7 @@ export default class EmbattlePage extends cc.Component {
                                 this.embattleContent.children[i].getChildByName("PetModel").addComponent(DragonBone).init(
                                     ResourceMgr.getPetUrl(GlobalData.userEmbattleInfos[i].userPetInfo.petInfo.id)
                                 ).playAnimation("stand", 0);
-                                this.updateBag();
+                                item.getChildByName("Tag").active = GlobalData.isOnEmbattle(userPet.id) ? true : false;
                             });
                             break;
                         }

@@ -27,6 +27,8 @@ export default class GameMgr extends cc.Component {
     gameCopyPage: cc.Prefab = null;
     @property({type: cc.Prefab})
     rankPage: cc.Prefab = null;
+    @property({type: cc.Prefab})
+    friendPage: cc.Prefab = null;
     
     static pageStack: PageInfo[] = [];
 
@@ -58,7 +60,8 @@ export default class GameMgr extends cc.Component {
             "EquipmentPage": "装备", 
             "GashaponPage": "扭蛋机",
             "GameCopyPage": "副本",
-            "RankPage": "排行榜"
+            "RankPage": "排行榜",
+            "FriendPage": "好友"
         }
         let quoteName = pageName.substring(0, 1).toLowerCase() + pageName.substring(1);
         let node = cc.instantiate(this[quoteName]);
@@ -76,7 +79,7 @@ export default class GameMgr extends cc.Component {
         let node = cc.instantiate(this.vsPage);
         node.zIndex = 10;
         this.node.addChild(node);
-        let eventBlock = this.addEventBlock();
+        this.addEventBlock();
     }
 
     addEventBlock(): cc.Node {

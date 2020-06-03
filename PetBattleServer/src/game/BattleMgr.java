@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import bean.UserVsRank;
 import controller.RankController;
 import pers.jc.mvc.Controller;
+import pers.jc.sql.CURD;
 import pers.jc.util.JCInterval;
 import result.BattleVsResult;
 
@@ -44,10 +45,9 @@ public class BattleMgr {
 		};
 	}
 	
-	public static void match(Player player, JSONArray embattle, int integral) {
+	public static void match(Player player, JSONArray embattle) {
 		synchronized (lockMatch) {
 			player.embattle = embattle;
-			player.integral = integral;
 			player.matchStartTime = System.currentTimeMillis();
 			
 			Player matchPlayer = null;
@@ -56,7 +56,11 @@ public class BattleMgr {
 				if (!matchingPlayer.isValid) {
 					continue;
 				}
-				if (Math.abs(player.integral - matchingPlayer.integral) <= 100) {
+				if (Math.abs(
+						player.userInfo.getIntegral() - 
+						matchingPlayer.userInfo.getIntegral()
+					) <= 100
+				) {
 					matchPlayer = matchingPlayer;
 					matchingList.remove(i);
 				}
@@ -176,42 +180,46 @@ public class BattleMgr {
 		BattleVsResult battleVsResult = new BattleVsResult();
 		boolean changed = true;
 		if (res.getInteger(0) > 0) {
-			int integral = 15 + (player2.integral - player1.integral) / 10;
-			player1.integral = player1.integral + integral;
+			int integral = 15 + (player2.userInfo.getIntegral() - player1.userInfo.getIntegral()) / 10;
+			player1.userInfo.setIntegral(player1.userInfo.getIntegral() + integral);
 			if (otherIsPlayer()) {
-				player2.integral = player2.integral - integral;
+				player2.userInfo.setIntegral(player2.userInfo.getIntegral() - integral);
 			}
 			battleVsResult.setRes("»÷°Ü");
 			battleVsResult.addSideIndex(0, 1);
-			battleVsResult.addIntegral(player1.integral, player2.integral);
+			battleVsResult.addIntegral(player1.userInfo.getIntegral(), player2.userInfo.getIntegral());
 			battleVsResult.addIntegralVar(integral, -integral);
 		} else if (res.getInteger(1) > 0) {
-			int integral = 15 + (player1.integral - player2.integral) / 10;
-			player1.integral = player1.integral - integral;
+			int integral = 15 + (player1.userInfo.getIntegral() - player2.userInfo.getIntegral()) / 10;
+			player1.userInfo.setIntegral(player1.userInfo.getIntegral() - integral);
 			if (otherIsPlayer()) {
-				player2.integral = player2.integral + integral;
+				player2.userInfo.setIntegral(player2.userInfo.getIntegral() + integral);
 			}
 			battleVsResult.setRes("»÷°Ü");
 			battleVsResult.addSideIndex(1, 0);
-			battleVsResult.addIntegral(player2.integral, player1.integral);
+			battleVsResult.addIntegral(player2.userInfo.getIntegral(), player1.userInfo.getIntegral());
 			battleVsResult.addIntegralVar(integral, -integral);
 		} else {
 			changed = false;
 			battleVsResult.setRes("Æ½¾Ö");
 			battleVsResult.addSideIndex(0, 1);
-			battleVsResult.addIntegral(player1.integral, player2.integral);
+			battleVsResult.addIntegral(player1.userInfo.getIntegral(), player2.userInfo.getIntegral());
 			battleVsResult.addIntegralVar(0, 0);
 		}
 		player1.call("showRes", battleVsResult);
+		player1.call("updateUserInfo", player1.userInfo);
 		if (otherIsPlayer()) {
 			player2.call("showRes", battleVsResult);
+			player2.call("updateUserInfo", player2.userInfo);
 		}
 		if (changed) {
-			player1.userVsRank.setIntegral(player1.integral);
+			player1.userVsRank.setIntegral(player1.userInfo.getIntegral());
 			setUserVsRank(player1.userVsRank);
+			CURD.update(player1.userInfo);
 			if (otherIsPlayer()) {
-				player2.userVsRank.setIntegral(player2.integral);
+				player2.userVsRank.setIntegral(player2.userInfo.getIntegral());
 				setUserVsRank(player2.userVsRank);
+				CURD.update(player2.userInfo);
 			}
 		}
 	}

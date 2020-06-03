@@ -52,8 +52,11 @@ export default class ResourceMgr extends cc.Component {
         let rate = 80 + Math.floor(this.dataComplete / this.dataTotal * 20);
         Camper.getInstance().showLoading("数据加载中(" + rate + "%)");
         if (this.dataComplete == this.dataTotal) {
-            Camper.getInstance().showLoading("场景切换中");
-            cc.director.loadScene("Game");
+            cc.director.preloadScene("Game", (completeCount, totalCount) => {
+                Camper.getInstance().showLoading("场景加载中(" + Math.floor((completeCount / totalCount) * 100) +"%)");
+            }, () => {
+                cc.director.loadScene("Game");
+            });
         }
     }
 
@@ -140,5 +143,33 @@ export default class ResourceMgr extends cc.Component {
 
     public static getPetUrl(petId: number): string {
         return "DragonBone/Pet/P" + petId;
+    }
+
+    static getSegmentByIntegral(integral: number) {
+        if (integral < 1200) {
+            return "倔强青铜";
+        } else if (integral < 1400) {
+            return "秩序白银";
+        } else if (integral < 1600) {
+            return "荣耀黄金";
+        } else if (integral < 1800) {
+            return "永恒钻石";
+        } else if (integral < 2000) {
+            return "至尊星耀";
+        } else {
+            return "最强王者";
+        }
+    }
+
+    static setSpriteFrame(sprite: cc.Sprite, url: string) {
+        if (url.startsWith("http")) {
+            cc.loader.load(url, (err, texture) => {
+                if (!err) {
+                    sprite.spriteFrame = new cc.SpriteFrame(texture);
+                }
+            })
+        } else {
+            sprite.spriteFrame = cc.loader.getRes(url, cc.SpriteFrame);
+        }
     }
 }

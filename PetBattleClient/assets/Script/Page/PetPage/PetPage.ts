@@ -533,20 +533,17 @@ class BreakUp {
                 Camper.getInstance().showToast("金币不足");
                 return;
             }
-            let userPetIds = this.getUserPetIds();
-            if (userPetIds.length == 0) {
-                Camper.getInstance().showToast("宠物材料不足");
+            if (this.userPetInfo.userPet.fragment == 0) {
+                Camper.getInstance().showToast("宠物碎片不足");
                 return;
             }
-            GlobalData.player.call("UserPetController.breakUp", [this.userPetInfo.userPet.id, [userPetIds[0]]], (res) => {
+            GlobalData.player.call("UserPetController.breakUp", [this.userPetInfo.userPet.id], (res) => {
                 if (res.code == 200) {
                     let userInfo: UserInfo = res.data.userInfo;
                     let userPet: UserPet = res.data.userPet;
-                    let userPets: UserPet[] = res.data.userPets;
                     let userProp: UserProp = res.data.userProp;
                     GlobalData.userInfo = userInfo;
                     JCTool.updateObject(this.userPetInfo, GlobalData.createUserPetInfo(userPet));
-                    GlobalData.removeUserPetInfos(userPets);
                     GlobalData.updateUserPropInfos([userProp]);
                     this.updatePanel();
                     this.target.renderDisplayStatusList(this.userPetInfo.userPet, this.userPetInfo.strength);
@@ -583,11 +580,10 @@ class BreakUp {
             countLabel1.color = cc.Color.RED;
             countLabel1.getComponent(cc.Label).string = "0/"  + (breakLevel + 1);
         }
-        let userPetIds = this.getUserPetIds();
         let countLabel2 = this.node.getChildByName("ConsumeList").children[1].getChildByName("Row").getChildByName("Label");
-        if (userPetIds.length > 0) {
+        if (this.userPetInfo.userPet.fragment > 0) {
             countLabel2.color = cc.Color.GREEN;
-            countLabel2.getComponent(cc.Label).string = userPetIds.length + "/1";
+            countLabel2.getComponent(cc.Label).string = this.userPetInfo.userPet.fragment + "/1";
         } else {
             countLabel2.color = cc.Color.RED;
             countLabel2.getComponent(cc.Label).string = "0/1";
@@ -601,26 +597,6 @@ class BreakUp {
         avatar.spriteFrame = ResourceMgr.getPetAvatar(this.userPetInfo.petInfo.id);
         this.node.getChildByName("ConsumeCoin").getChildByName("Layout").getChildByName("Label").getComponent(cc.Label).string = ((breakLevel + 1) * 10000).toString();
         this.node.getChildByName("Tip").getChildByName("Label").getComponent(cc.Label).string = "【突破】需要基础等级达到" + ((breakLevel + 1) * 10) + "级";
-    }
-
-    getUserPetIds() {
-        let userPetIds = [];
-        for (let userPetInfo of GlobalData.userPetInfos) {
-            if (userPetInfo.userPet.pet_id != this.userPetInfo.userPet.pet_id) {
-                continue;
-            }
-            if (userPetInfo.userPet.id == this.userPetInfo.userPet.id) {
-                continue;
-            } 
-            if (userPetInfo.userPet.pet_level > 0) {
-                continue;
-            }
-            if (GlobalData.isOnEmbattle(userPetInfo.userPet.id)) {
-                continue;
-            }
-            userPetIds.push(userPetInfo.userPet.id);
-        }
-        return userPetIds;
     }
 }
 class Equipment {
@@ -690,6 +666,7 @@ class Equipment {
                 }
                 item.getChildByName("RowName").getChildByName("Label").getComponent(cc.Label).string = 
                     userEquipmentInfo.equipmentInfo.name;
+                item.getChildByName("RowName").getChildByName("Label").color = cc.Color.GREEN;
             } else {
                 let frameAndBase = ResourceMgr.getFrameAndBase("N");
                 let item = this.EquipmentList.children[i];

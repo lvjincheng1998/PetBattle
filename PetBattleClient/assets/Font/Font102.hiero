@@ -18,7 +18,7 @@ pad.advance.y=-2
 glyph.native.rendering=false
 glyph.page.width=512
 glyph.page.height=512
-glyph.text=背包、阵型、精灵、副本、商城、装备、图鉴、联盟、邮件、排行榜、好友、扭蛋机、对战、设置
+glyph.text=背包、阵型、精灵、副本、商城、装备、图鉴、联盟、邮件、排行榜、好友、扭蛋机、对战、设置、好友
 
 render_type=0
 

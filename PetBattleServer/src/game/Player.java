@@ -4,14 +4,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import bean.UserInfo;
 import bean.UserVsRank;
-import controller.UserController;
 import pers.jc.engine.JCEntity;
+import pers.jc.engine.JCManager;
 import pers.jc.util.JCLogger;
 
 public class Player extends JCEntity {
 	public UserInfo userInfo;
 	public JSONArray embattle;
-	public int integral;
 	public int skillPetIndex = -1;
 	public long matchStartTime;
 	public BattleMgr battleMgr;
@@ -19,7 +18,7 @@ public class Player extends JCEntity {
 	
 	public void onDestroy() {
 		if (userInfo != null) {
-			UserController.userMapper.remove(userInfo.getId());
+			JCManager.removeEntity(this);
 			JCLogger.info("(ID:" + userInfo.getId() + ")[" + userInfo.getNickname() + "]ÍË³öÓÎÏ·");
 		}
 	}

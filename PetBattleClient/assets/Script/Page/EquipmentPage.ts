@@ -59,9 +59,9 @@ export default class EquipmentPage extends cc.Component {
 
     clearBag() {
         let item = this.bagContent.children[0];
-        let equipment = item.getChildByName("Equipment");
         item.active = false;
-        equipment.active = false;
+        item.getChildByName("Equipment").active = false;
+        item.getChildByName("Tag").active = false;
         for (let i = 1; i < this.bagContent.childrenCount; i++) {
             this.bagContent.children[i].destroy();
         }
@@ -170,6 +170,7 @@ export default class EquipmentPage extends cc.Component {
                         c.active = false;
                     }
                 });
+                itemCopy.getChildByName("Tag").active = userEquipment.user_pet_id > 0 ? true : false;
                 if (userEquipment.strength_level > 0) {
                     equipment.getChildByName("Row").getChildByName("Label").getComponent(cc.Label).string = "+" + userEquipment.strength_level;
                 } else {
@@ -258,6 +259,7 @@ export default class EquipmentPage extends cc.Component {
             }
         });
         if ( this.currentUserEquipmentInfo.userEquipment.strength_level > 0) {
+            item.getChildByName("Equipment").getChildByName("Row").active = true;
             item.getChildByName("Equipment").getChildByName("Row").getChildByName("Label").getComponent(cc.Label).string = 
                 "+" +  this.currentUserEquipmentInfo.userEquipment.strength_level;
         } else {

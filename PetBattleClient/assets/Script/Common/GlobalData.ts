@@ -12,7 +12,8 @@ export default class GlobalData {
         avatarUrl: "http://118.89.184.186:888/avatar/cartoon/girl/1.jpg",
         coin: 30000,
         diamond: 5000,
-        strength: 120
+        strength: 120,
+        integral: 1000
     };
 
     static userPetInfos: UserPetInfo[] = [];
@@ -55,34 +56,36 @@ export default class GlobalData {
         return count;
     }
 
-    static createUserPetInfo(userPet: UserPet): UserPetInfo {
-        let petInfo = ResourceMgr.getPetInfo(userPet.pet_id);
+    static createUserPetInfo(userPet: UserPet, ignoreEquipment?: boolean): UserPetInfo {
+        let petInfo = JSON.parse(JSON.stringify(ResourceMgr.getPetInfo(userPet.pet_id)));
         let userPetStatus = this.calculateStatus(userPet, petInfo);
         let userEquipmentInfos = [];
-        for (let userEquipmentInfo of GlobalData.userEquipmentInfos) {
-            if (userEquipmentInfo.userEquipment.user_pet_id == userPet.id) {
-                if (userEquipmentInfo.equipmentInfo.name.endsWith("护目")) {
-                    userEquipmentInfos[0] = userEquipmentInfo;
-                } else if (userEquipmentInfo.equipmentInfo.name.endsWith("手镯")) {
-                    userEquipmentInfos[1] = userEquipmentInfo;
-                } else if (userEquipmentInfo.equipmentInfo.name.endsWith("头饰")) {
-                    userEquipmentInfos[2] = userEquipmentInfo;
-                } else if (userEquipmentInfo.equipmentInfo.name.endsWith("项链")) {
-                    userEquipmentInfos[3] = userEquipmentInfo;
-                } else if (userEquipmentInfo.equipmentInfo.name.endsWith("尖牙")) {
-                    userEquipmentInfos[4] = userEquipmentInfo;
-                } else if (userEquipmentInfo.equipmentInfo.name.endsWith("星石")) {
-                    userEquipmentInfos[5] = userEquipmentInfo;
-                }
-                for (let key in userEquipmentInfo.userEquipment.main_status) {
-                    let value = userEquipmentInfo.userEquipment.main_status[key];
-                    userPetStatus[key][1] += value;
-                    userPetStatus[key][2] += value;
-                }
-                for (let key in userEquipmentInfo.userEquipment.vice_status) {
-                    let value = userEquipmentInfo.userEquipment.vice_status[key];
-                    userPetStatus[key][1] += value;
-                    userPetStatus[key][2] += value;
+        if (!ignoreEquipment) {
+            for (let userEquipmentInfo of GlobalData.userEquipmentInfos) {
+                if (userEquipmentInfo.userEquipment.user_pet_id == userPet.id) {
+                    if (userEquipmentInfo.equipmentInfo.name.endsWith("护目")) {
+                        userEquipmentInfos[0] = userEquipmentInfo;
+                    } else if (userEquipmentInfo.equipmentInfo.name.endsWith("手镯")) {
+                        userEquipmentInfos[1] = userEquipmentInfo;
+                    } else if (userEquipmentInfo.equipmentInfo.name.endsWith("头饰")) {
+                        userEquipmentInfos[2] = userEquipmentInfo;
+                    } else if (userEquipmentInfo.equipmentInfo.name.endsWith("项链")) {
+                        userEquipmentInfos[3] = userEquipmentInfo;
+                    } else if (userEquipmentInfo.equipmentInfo.name.endsWith("尖牙")) {
+                        userEquipmentInfos[4] = userEquipmentInfo;
+                    } else if (userEquipmentInfo.equipmentInfo.name.endsWith("星石")) {
+                        userEquipmentInfos[5] = userEquipmentInfo;
+                    }
+                    for (let key in userEquipmentInfo.userEquipment.main_status) {
+                        let value = userEquipmentInfo.userEquipment.main_status[key];
+                        userPetStatus[key][1] += value;
+                        userPetStatus[key][2] += value;
+                    }
+                    for (let key in userEquipmentInfo.userEquipment.vice_status) {
+                        let value = userEquipmentInfo.userEquipment.vice_status[key];
+                        userPetStatus[key][1] += value;
+                        userPetStatus[key][2] += value;
+                    }
                 }
             }
         }
@@ -359,6 +362,7 @@ declare global {
         coin: number;
         diamond: number;
         strength: number;
+        integral: number;
     }
     interface UserPetInfo {
         userPet: UserPet;
@@ -376,6 +380,7 @@ declare global {
         break_level: number;
         pet_exp: number;
         blood_exp: number;
+        fragment: number;
     }
     interface UserPetStatus {
         hp: number[];

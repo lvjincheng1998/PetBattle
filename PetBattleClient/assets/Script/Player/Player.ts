@@ -6,6 +6,7 @@ import DragonBone from "../Component/DragonBone";
 import BattleMgr from "../Manager/BattleMgr";
 import GameMgr from "../Manager/GameMgr";
 import ResourceMgr from "../Manager/ResourceMgr";
+import FriendPage from "../Page/FriendPage";
 
 const {ccclass, property} = cc._decorator;
 
@@ -48,11 +49,7 @@ export default class Player extends JCEntity {
             let sideNode = sideNodes[i];
             let sideIndex = result.sideIndexes[i];
             let userInfo = userInfos[sideIndex];
-            cc.loader.load(userInfo.avatarUrl, (err, texture) => {
-                sideNode.getChildByName("HeadPhoto")
-                .getChildByName("Sprite")
-                .getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
-            });
+            ResourceMgr.setSpriteFrame(sideNode.getChildByName("HeadPhoto").getChildByName("Sprite").getComponent(cc.Sprite), userInfo.avatarUrl);
             sideNode.getChildByName("Nickname").getComponent(cc.Label).string = userInfo.nickname;
             sideNode.getChildByName("Integral").children[0].getComponent(cc.Label).string = result.integrals[i].toString();
             if (result.integralVars[i] == 0) {
@@ -89,6 +86,18 @@ export default class Player extends JCEntity {
             });
             console.log(output.join("、"));
         }
+    }
+
+    receivePrivateMsg(friendChat) {
+        FriendPage.pushPrivateMsg(friendChat);
+    }
+
+    receivePublicMsg(friendChatPublic) {
+        FriendPage.pushPublicMsg(friendChatPublic);
+    }
+
+    updateUserInfo(userInfo) {
+        GlobalData.userInfo = userInfo;
     }
 }
 interface BattleVsResult {

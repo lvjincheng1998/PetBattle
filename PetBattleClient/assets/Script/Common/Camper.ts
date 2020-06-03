@@ -20,7 +20,7 @@ export default class Camper extends cc.Component {
         return cc.find("Camper").getComponent(Camper);
     }
 
-    showLoading(tip: string) {
+    showLoading(tip: string, dynamic: boolean = false) {
         let node = null;
         if (this.instance_loading && this.instance_loading.isValid) {
             node = this.instance_loading;
@@ -30,7 +30,7 @@ export default class Camper extends cc.Component {
             cc.find("Canvas").addChild(node);
             this.instance_loading = node;
         }
-        node.getComponent(Loading).setTip(tip);
+        node.getComponent(Loading).setTip(tip, dynamic);
     }
 
     hideLoading() {

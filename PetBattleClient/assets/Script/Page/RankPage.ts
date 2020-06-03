@@ -53,6 +53,7 @@ export default class RankPage extends cc.Component {
                     item.petInfos[i] = ResourceMgr.getPetInfo(pet_id);
                 });
                 this.render(item, index);
+                console.log(item)
             });
         });
     }
@@ -61,12 +62,7 @@ export default class RankPage extends cc.Component {
         let node = cc.instantiate(this.content.children[0]);
         node.active = true;
         node.getChildByName("RankNum").getComponent(cc.Label).string = (index + 1).toString();
-        cc.loader.load(item.avatarUrl, (err, texture) => {
-            if (!err) {
-                node.getChildByName("HeadPhoto").getChildByName("Avatar").getComponent(cc.Sprite).spriteFrame
-                    = new cc.SpriteFrame(texture);
-            }
-        });
+        ResourceMgr.setSpriteFrame(node.getChildByName("HeadPhoto").getChildByName("Avatar").getComponent(cc.Sprite), item.avatarUrl);
         node.getChildByName("Nickname").getComponent(cc.Label).string = item.nickname;
         node.getChildByName("Strength").getComponent(cc.Label).string = "战斗力:\n" + item.strength;
         node.getChildByName("PetList").children.forEach((c, i) => {

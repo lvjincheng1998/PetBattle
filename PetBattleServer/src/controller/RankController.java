@@ -31,15 +31,4 @@ public class RankController {
 			LIMIT("30");
 		}});
 	}
-	
-	public int getUserIntegral(int user_id) {
-		UserVsRank userVsRank = CURD.selectOne(UserVsRank.class, new SQL() {{
-			WHERE("user_id=" + PARAM(user_id));
-		}});
-		if (userVsRank == null) {
-			return 1000;
-		} else {
-			return userVsRank.getIntegral();
-		}
-	}
 }

@@ -6,6 +6,7 @@ import GlobalData from "../Common/GlobalData";
 import GameMgr from "./GameMgr";
 import { Random } from "../SDK/Random";
 import Camper from "../Common/Camper";
+import ResourceMgr from "./ResourceMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -93,12 +94,8 @@ export default class BattleMgr extends cc.Component {
         });
 
         if (BattleMgr.userInfos) {
-            cc.loader.load(BattleMgr.userInfos[0].avatarUrl, (err, texture) => {
-                this.headPhotoLeft.spriteFrame = new cc.SpriteFrame(texture);
-            });
-            cc.loader.load(BattleMgr.userInfos[1].avatarUrl, (err, texture) => {
-                this.headPhotoRight.spriteFrame = new cc.SpriteFrame(texture);
-            });
+            ResourceMgr.setSpriteFrame(this.headPhotoLeft, BattleMgr.userInfos[0].avatarUrl);
+            ResourceMgr.setSpriteFrame(this.headPhotoRight, BattleMgr.userInfos[1].avatarUrl);
         } else {
             this.setImageBase64(this.defaultHeadPhoto, (texture: cc.Texture2D) => {
                 this.headPhotoLeft.spriteFrame = new cc.SpriteFrame(texture);

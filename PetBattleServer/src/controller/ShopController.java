@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
+
 import bean.ShopGoods;
 import bean.UserEquipment;
 import bean.UserInfo;
@@ -14,6 +15,7 @@ import bean.UserProp;
 import game.Player;
 import pers.jc.mvc.Controller;
 import pers.jc.sql.CURD;
+import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.BuyGoodsResult;
 import result.RequestResult;
@@ -119,9 +121,18 @@ public class ShopController {
 		userProp.setUser_id(userInfo.getId());
 		userProp.setProp_id(shopGoods.getGoods_id());
 		userProp.setAmount(shopGoods.getSingle_buy());
-		UserPet userPet = new UserPet();
-		userPet.setUser_id(userInfo.getId());
-		userPet.setPet_id(shopGoods.getGoods_id());
+		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+			WHERE("user_id=" + PARAM(userInfo.getId()));
+			WHERE("pet_id=" + PARAM(shopGoods.getGoods_id()));
+		}});
+		if (userPet == null) {
+			userPet = new UserPet();
+			userPet.setUser_id(userInfo.getId());
+			userPet.setPet_id(shopGoods.getGoods_id());
+		} else {
+			userPet.setFragment(userPet.getFragment() + 1);
+		}
+		UserPet userPet_new = userPet;
 		UserEquipment userEquipment = new UserEquipment();
 		userEquipment.setUser_id(userInfo.getId());
 		userEquipment.setEquipment_id(shopGoods.getGoods_id());
@@ -133,8 +144,12 @@ public class ShopController {
 			public void run() throws Exception {
 				update(userInfo);
 				if (shopGoods.getGoods_type().equals("pet")) {
-					insertAndGenerateKeys(userPet);
-					buyGoodsResult.setUserGoods(userPet);
+					if (userPet_new.getId() == 0) {
+						insertAndGenerateKeys(userPet_new);
+					} else {
+						update(userPet_new);
+					}
+					buyGoodsResult.setUserGoods(userPet_new);
 				} else if (shopGoods.getGoods_type().equals("prop")) {
 					UserPropController.addProp(this, userProp, requestResult);
 					buyGoodsResult.setUserGoods(userProp);

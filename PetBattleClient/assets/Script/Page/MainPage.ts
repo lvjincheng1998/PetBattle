@@ -1,6 +1,8 @@
 import GlobalData from "../Common/GlobalData";
 import GameMgr from "../Manager/GameMgr";
 import Camper from "../Common/Camper";
+import JCLib from "../SDK/JCLib";
+import ResourceMgr from "../Manager/ResourceMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,15 +28,7 @@ export default class MainPage extends cc.Component {
         this.bottomBtnList.x = -cc.winSize.width / 2 + 10;
         this.leftBtnList.x = -cc.winSize.width / 2 + 10;
         this.rightBtnList.x = -cc.winSize.width / 2 + 135;
-        cc.loader.load(GlobalData.userInfo.avatarUrl, (err, texture) => {
-            if (!err) {
-                this.node.getChildByName("UserInfo")
-                .getChildByName("HeadPhoto")
-                .getChildByName("Avatar")
-                .getComponent(cc.Sprite)
-                .spriteFrame = new cc.SpriteFrame(texture);
-            }
-        });
+        ResourceMgr.setSpriteFrame(JCLib.getComponentByPath(this.node, "UserInfo/HeadPhoto/Avatar", cc.Sprite), GlobalData.userInfo.avatarUrl);
         this.node.getChildByName("UserInfo").getChildByName("NameFrame").getChildByName("Label").getComponent(cc.Label).string = GlobalData.userInfo.nickname;
     }
 

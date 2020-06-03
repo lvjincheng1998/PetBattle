@@ -1,6 +1,8 @@
 import GlobalData from "../Common/GlobalData";
 import ResourceMgr from "../Manager/ResourceMgr";
 import BattleMgr from "../Manager/BattleMgr";
+import JCTool from "../SDK/JCTool";
+import JCLib from "../SDK/JCLib";
 
 const {ccclass, property} = cc._decorator;
 
@@ -37,9 +39,7 @@ export default class VSPage extends cc.Component {
         this.showSearchTip();
         this.renderMyHeadPhoto();
         this.renderMyEmbattle();
-        GlobalData.player.call("RankController.getUserIntegral", [GlobalData.userInfo.id], (integral) => {
-            GlobalData.player.call("BattleMgr.match", [GlobalData.userEmbattleInfos, integral]);
-        });
+        GlobalData.player.call("BattleMgr.match", [GlobalData.userEmbattleInfos]);
     }
 
     showSearchTip() {
@@ -63,23 +63,13 @@ export default class VSPage extends cc.Component {
     }
 
     renderMyHeadPhoto() {
-        cc.loader.load(GlobalData.userInfo.avatarUrl, (err, texture) => {
-            if (!err) {
-                this.node.getChildByName("HeadPhotoLeft").getChildByName("HeadPhoto").getComponent(cc.Sprite).spriteFrame = 
-                    new cc.SpriteFrame(texture);
-            }
-        });
+        ResourceMgr.setSpriteFrame(JCLib.getComponentByPath(this.node, "HeadPhotoLeft/HeadPhoto", cc.Sprite), GlobalData.userInfo.avatarUrl);
     }
 
-    renderOtherHeadPhoto(userIfno: UserInfo) {
+    renderOtherHeadPhoto(userInfo: UserInfo) {
         let headPhoto = this.node.getChildByName("HeadPhotoRight");
         headPhoto.active = true;
-        cc.loader.load(userIfno.avatarUrl, (err, texture) => {
-            if (!err) {
-                headPhoto.getChildByName("HeadPhoto").getComponent(cc.Sprite).spriteFrame = 
-                    new cc.SpriteFrame(texture);
-            }
-        });
+        ResourceMgr.setSpriteFrame(headPhoto.getChildByName("HeadPhoto").getComponent(cc.Sprite), userInfo.avatarUrl);
     }
 
     renderMyEmbattle() {
@@ -126,31 +116,8 @@ export default class VSPage extends cc.Component {
     matchSuccess(otherUserInfo: UserInfo, otherEmbattle: UserEmbattleInfo[], selfSide: number) {
         if (GlobalData.userInfo.id == otherUserInfo.id) {
             BattleMgr.online = false;
-            let strs = otherUserInfo.avatarUrl.split("/");
-            strs.pop();
-            strs.pop();
-            strs.push("pet_battle", Math.random() < 0.5 ? "6901.jpg" : "6902.jpg");
-            otherUserInfo.avatarUrl = strs.join("/");
-            otherUserInfo.nickname = "机器人玩家";
-            
-            let old_embattle = [];
-            let new_embattle = [];
-            otherEmbattle.forEach((elem) => {
-                if (elem) {
-                    old_embattle.push(elem);
-                    new_embattle.push(elem);
-                }
-            });
-            while (new_embattle.length < otherEmbattle.length) {
-                let base = old_embattle[Math.floor(Math.random() * old_embattle.length)];
-                let copy = JSON.parse(JSON.stringify(base));
-                new_embattle.push(copy);
-            }
-            for (let embattle of new_embattle) {
-                embattle.userPetInfo.petInfo = ResourceMgr.petInfos[Math.floor(Math.random() * ResourceMgr.petInfos.length)];
-                embattle.userPetInfo.petInfo = JSON.parse(JSON.stringify(embattle.userPetInfo.petInfo));
-            }
-            otherEmbattle = new_embattle;
+
+            this.createBotEmbattle(otherUserInfo, otherEmbattle);
         } else {
             BattleMgr.online = true;
         }
@@ -184,5 +151,77 @@ export default class VSPage extends cc.Component {
         }
         BattleMgr.doublePetInfo = doublePetInfo;
         cc.director.loadScene("Battle");
+    }
+
+    createBotEmbattle(otherUserInfo: UserInfo, otherEmbattle: UserEmbattleInfo[]) {
+        let petIds = [];
+
+        let random = Math.random();
+        if (random < 0.5) {
+            let strs = otherUserInfo.avatarUrl.split("/");
+            strs.pop();
+            if (random < 0.25) {
+                strs.push("6901");
+                otherUserInfo.nickname = "斗野";
+            } else {
+                strs.push("6902");
+                otherUserInfo.nickname = "斗子";
+            }
+            otherUserInfo.avatarUrl = strs.join("/");
+            for (let petInfo of ResourceMgr.petInfos) {
+                petIds.push(petInfo.id);
+            }
+            JCTool.shuffleSort(petIds);
+        } else {
+            let petInfo = ResourceMgr.petInfos[Math.floor((random - 0.5) / 0.5 * ResourceMgr.petInfos.length)];
+            for (let i = 0; i < 6; i++) {
+                petIds.push(petInfo.id);
+            }
+            otherUserInfo.nickname = petInfo.name;
+            otherUserInfo.avatarUrl = "Texture/Icon/PetHeadPhoto/" + petInfo.id;
+        }
+        
+        let petCount = 0;
+        let petLevelTotal = 0;
+        let petBloodTotal = 0;
+        let petBreakTotal = 0;
+        otherEmbattle.forEach((elem: UserEmbattleInfo) => {
+            if (elem) {
+                petCount++;
+                petLevelTotal += elem.userPetInfo.userPet.pet_level;
+                petBloodTotal += elem.userPetInfo.userPet.blood_level;
+                petBreakTotal += elem.userPetInfo.userPet.break_level;
+            }
+        });
+        let petLevel = Math.ceil(petLevelTotal / petCount);
+        let petBlood = Math.ceil(petBloodTotal / petCount);
+        let petBreak = Math.ceil(petBreakTotal / petCount);
+
+        let otherEmbattle_new = [];
+        let sampleEmbattle = null;
+        for (let singleEmbattle of otherEmbattle) {
+            if (singleEmbattle) {
+                sampleEmbattle = singleEmbattle;
+                break;
+            }
+        }
+        while(otherEmbattle_new.length < 6) {
+            let copyEmbattle = JSON.parse(JSON.stringify(sampleEmbattle));
+            copyEmbattle.userPetInfo = GlobalData.createUserPetInfo({
+                id: 0,
+                user_id: otherUserInfo.id,
+                pet_id: petIds.pop(),
+                pet_level: petLevel,
+                blood_level: petBlood,
+                break_level: petBreak,
+                pet_exp: 0,
+                blood_exp: 0,
+                fragment: 0
+            }, true);
+            otherEmbattle_new.push(copyEmbattle);
+        }
+        for (let i in otherEmbattle_new) {
+            otherEmbattle[i] = otherEmbattle_new[i];
+        }
     }
 }

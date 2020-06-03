@@ -10,6 +10,14 @@
 使用Cocos Creator-2.3.3打开项目PetBattleClient。
 找到LoginMgr.ts文件，修改连接后台的URL。
 
+已有测试账号：
+账号 | 密码
+---|---
+123456 | 123456
+asdfgh | asdfgh
+
+注意：要先运行服务端再运行客户端，否则会报连接错误。
+
 ### 服务端说明
 推荐使用Eclipse打开项目PetBattleServer。
 

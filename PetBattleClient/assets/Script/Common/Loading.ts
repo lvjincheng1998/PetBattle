@@ -6,21 +6,29 @@ export default class Loading extends cc.Component {
     text: cc.Label = null;
 
     tip: string = "";
+    count: number = 0;
+    dynamic: boolean = false;
 
-    onLoad() {
-        let count = 0;
-        this.schedule(() => {
-            count++;
-            let content = this.tip;
-            for (let i = 0; i < count % 4; i++) {
-                content += ".";
-            }
-            this.text.string = content;
-        }, 0.5);
-    }
-
-    setTip(tip: string) {
+    setTip(tip: string, dynamic: boolean) {
         this.tip = tip;
         this.text.string = tip;
+        this.count = 0;
+        if (dynamic) {
+            if (!this.dynamic) {
+                this.schedule(this.pointDynamic, 0.5);
+            }
+        } else {
+            this.unschedule(this.pointDynamic);
+        }
+        this.dynamic = dynamic;
+    }
+
+    private pointDynamic() {
+        this.count++;
+        let content = this.tip;
+        for (let i = 0; i < this.count % 4; i++) {
+            content += ".";
+        }
+        this.text.string = content;
     }
 }

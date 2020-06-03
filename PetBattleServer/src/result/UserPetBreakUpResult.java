@@ -7,7 +7,6 @@ import bean.UserProp;
 public class UserPetBreakUpResult {
 	private UserInfo userInfo;
 	private UserPet userPet;
-	private UserPet[] userPets;
 	private UserProp userProp;
 	public UserInfo getUserInfo() {
 		return userInfo;
@@ -20,12 +19,6 @@ public class UserPetBreakUpResult {
 	}
 	public void setUserPet(UserPet userPet) {
 		this.userPet = userPet;
-	}
-	public UserPet[] getUserPets() {
-		return userPets;
-	}
-	public void setUserPets(UserPet[] userPets) {
-		this.userPets = userPets;
 	}
 	public UserProp getUserProp() {
 		return userProp;

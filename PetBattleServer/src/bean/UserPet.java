@@ -24,6 +24,8 @@ public class UserPet {
 	private int pet_exp;
 	@Column
 	private int blood_exp;
+	@Column
+	private int fragment;
 	public int getId() {
 		return id;
 	}
@@ -71,5 +73,11 @@ public class UserPet {
 	}
 	public void setBlood_exp(int blood_exp) {
 		this.blood_exp = blood_exp;
+	}
+	public int getFragment() {
+		return fragment;
+	}
+	public void setFragment(int fragment) {
+		this.fragment = fragment;
 	}
 }
