@@ -147,6 +147,9 @@ export default class FriendPage extends cc.Component {
             } else {
                 list = res;
                 FriendPage.friendChat_map.set(friend_id, list);
+                for (let friendChat of res) {
+                    msg_ids.push(friendChat.id);
+                }
             }
             list.sort((a, b) => {
                 return a.send_time - b.send_time;
