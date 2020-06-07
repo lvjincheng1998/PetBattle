@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80020
 File Encoding         : 65001
 
-Date: 2020-06-04 01:45:06
+Date: 2020-06-07 22:56:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -138,23 +138,23 @@ CREATE TABLE `user_embattle` (
   KEY `user_pet_id` (`user_pet_id`),
   CONSTRAINT `user_embattle_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_embattle_ibfk_2` FOREIGN KEY (`user_pet_id`) REFERENCES `user_pet` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=521 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=538 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_embattle
 -- ----------------------------
-INSERT INTO `user_embattle` VALUES ('508', '10000003', '1370', '0');
-INSERT INTO `user_embattle` VALUES ('510', '10000008', '1373', '0');
-INSERT INTO `user_embattle` VALUES ('511', '10000008', '1377', '1');
-INSERT INTO `user_embattle` VALUES ('512', '10000008', '1371', '2');
-INSERT INTO `user_embattle` VALUES ('513', '10000008', '1372', '3');
-INSERT INTO `user_embattle` VALUES ('514', '10000008', '1375', '4');
-INSERT INTO `user_embattle` VALUES ('515', '10000008', '1378', '5');
-INSERT INTO `user_embattle` VALUES ('516', '10000003', '1381', '1');
-INSERT INTO `user_embattle` VALUES ('517', '10000003', '1385', '2');
-INSERT INTO `user_embattle` VALUES ('518', '10000003', '1386', '3');
-INSERT INTO `user_embattle` VALUES ('519', '10000003', '1383', '4');
-INSERT INTO `user_embattle` VALUES ('520', '10000003', '1382', '5');
+INSERT INTO `user_embattle` VALUES ('524', '10000003', '1381', '0');
+INSERT INTO `user_embattle` VALUES ('526', '10000003', '1384', '1');
+INSERT INTO `user_embattle` VALUES ('527', '10000003', '1387', '2');
+INSERT INTO `user_embattle` VALUES ('529', '10000003', '1383', '3');
+INSERT INTO `user_embattle` VALUES ('530', '10000003', '1370', '4');
+INSERT INTO `user_embattle` VALUES ('531', '10000003', '1389', '5');
+INSERT INTO `user_embattle` VALUES ('532', '10000008', '1391', '0');
+INSERT INTO `user_embattle` VALUES ('533', '10000008', '1375', '1');
+INSERT INTO `user_embattle` VALUES ('534', '10000008', '1374', '2');
+INSERT INTO `user_embattle` VALUES ('535', '10000008', '1378', '3');
+INSERT INTO `user_embattle` VALUES ('536', '10000008', '1376', '4');
+INSERT INTO `user_embattle` VALUES ('537', '10000008', '1371', '5');
 
 -- ----------------------------
 -- Table structure for user_equipment
@@ -183,14 +183,14 @@ INSERT INTO `user_equipment` VALUES ('354', '10000003', '3053', '{\"resist\":25}
 INSERT INTO `user_equipment` VALUES ('355', '10000003', '3033', '{\"hp\":342}', '{\"defend\":19,\"hp\":188,\"speed\":12}', '2', '0', '0');
 INSERT INTO `user_equipment` VALUES ('356', '10000003', '3023', '{\"defend\":34}', '{\"hit\":12,\"critHurt\":25,\"hp\":187}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('358', '10000003', '3003', '{\"hit\":16}', '{\"defend\":26,\"resist\":13,\"speed\":14}', '2', '2', '0');
-INSERT INTO `user_equipment` VALUES ('360', '10000003', '3053', '{\"resist\":27}', '{\"defend\":17,\"attack\":48,\"speed\":15}', '0', '0', '0');
+INSERT INTO `user_equipment` VALUES ('360', '10000003', '3053', '{\"resist\":27}', '{\"defend\":17,\"attack\":48,\"speed\":15}', '3', '0', '0');
 INSERT INTO `user_equipment` VALUES ('361', '10000003', '3043', '{\"speed\":20}', '{\"hit\":13,\"critHurt\":20,\"resist\":13}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('363', '10000003', '3013', '{\"attack\":54}', '{\"critHurt\":25,\"hp\":189,\"critRate\":9}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('364', '10000003', '3023', '{\"defend\":29}', '{\"critHurt\":20,\"resist\":9,\"speed\":15}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('365', '10000003', '3003', '{\"resist\":26}', '{\"hit\":14,\"attack\":53,\"critRate\":11}', '1', '0', '0');
 INSERT INTO `user_equipment` VALUES ('366', '10000003', '3033', '{\"defend\":33}', '{\"attack\":47,\"resist\":9,\"hp\":264}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('367', '10000003', '3013', '{\"critHurt\":24}', '{\"defend\":27,\"critHurt\":16,\"resist\":13}', '0', '0', '0');
-INSERT INTO `user_equipment` VALUES ('368', '10000003', '3042', '{\"critHurt\":13}', '{\"defend\":17,\"resist\":10}', '0', '0', '0');
+INSERT INTO `user_equipment` VALUES ('368', '10000003', '3042', '{\"critHurt\":13}', '{\"defend\":17,\"resist\":10}', '0', '2', '0');
 INSERT INTO `user_equipment` VALUES ('369', '10000003', '3023', '{\"resist\":26}', '{\"defend\":26,\"hp\":202,\"speed\":13}', '0', '0', '0');
 INSERT INTO `user_equipment` VALUES ('370', '10000008', '3033', '{\"resist\":16}', '{\"hit\":13,\"defend\":17,\"critRate\":8}', '0', '0', '1373');
 INSERT INTO `user_equipment` VALUES ('371', '10000008', '3013', '{\"attack\":52}', '{\"hit\":11,\"resist\":13,\"critRate\":12}', '0', '0', '1373');
@@ -221,8 +221,8 @@ CREATE TABLE `user_info` (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('10000003', '玩家10000003', '2', 'Texture/Icon/HeadPhoto/6901', '999754000', '531252', '100', '985');
-INSERT INTO `user_info` VALUES ('10000008', '玩家10000008', '1', 'Texture/Icon/HeadPhoto/6902', '90000', '42356', '100', '1015');
+INSERT INTO `user_info` VALUES ('10000003', '玩家10000003', '2', 'Texture/Icon/HeadPhoto/6901', '999696900', '525226', '100', '1045');
+INSERT INTO `user_info` VALUES ('10000008', '玩家10000008', '1', 'Texture/Icon/HeadPhoto/6902', '90000', '39924', '100', '1015');
 
 -- ----------------------------
 -- Table structure for user_login
@@ -260,28 +260,33 @@ CREATE TABLE `user_pet` (
   PRIMARY KEY (`id`),
   KEY `user_pet_ibfk_1` (`user_id`),
   CONSTRAINT `user_pet_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1387 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1392 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_pet
 -- ----------------------------
-INSERT INTO `user_pet` VALUES ('1370', '10000003', '6006', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1371', '10000008', '6095', '0', '0', '0', '0', '0', '4');
-INSERT INTO `user_pet` VALUES ('1372', '10000008', '6017', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1373', '10000008', '6140', '100', '0', '0', '600000', '0', '1');
-INSERT INTO `user_pet` VALUES ('1374', '10000008', '6005', '0', '0', '0', '0', '0', '14');
-INSERT INTO `user_pet` VALUES ('1375', '10000008', '6104', '0', '0', '0', '0', '0', '3');
-INSERT INTO `user_pet` VALUES ('1376', '10000008', '6004', '0', '0', '0', '0', '0', '9');
-INSERT INTO `user_pet` VALUES ('1377', '10000008', '6115', '0', '0', '0', '0', '0', '4');
-INSERT INTO `user_pet` VALUES ('1378', '10000008', '6133', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1379', '10000008', '6113', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1380', '10000008', '6131', '0', '0', '0', '0', '0', '2');
-INSERT INTO `user_pet` VALUES ('1381', '10000003', '6115', '0', '0', '0', '0', '0', '2');
-INSERT INTO `user_pet` VALUES ('1382', '10000003', '6004', '0', '0', '0', '0', '0', '2');
-INSERT INTO `user_pet` VALUES ('1383', '10000003', '6017', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1384', '10000003', '6113', '0', '0', '0', '0', '0', '1');
-INSERT INTO `user_pet` VALUES ('1385', '10000003', '6005', '0', '0', '0', '0', '0', '0');
-INSERT INTO `user_pet` VALUES ('1386', '10000003', '6104', '0', '0', '0', '0', '0', '0');
+INSERT INTO `user_pet` VALUES ('1370', '10000003', '6006', '100', '0', '0', '0', '0', '1');
+INSERT INTO `user_pet` VALUES ('1371', '10000008', '6095', '100', '0', '0', '0', '0', '6');
+INSERT INTO `user_pet` VALUES ('1372', '10000008', '6017', '100', '0', '0', '0', '0', '2');
+INSERT INTO `user_pet` VALUES ('1373', '10000008', '6140', '100', '0', '0', '600000', '0', '2');
+INSERT INTO `user_pet` VALUES ('1374', '10000008', '6005', '100', '0', '0', '0', '0', '18');
+INSERT INTO `user_pet` VALUES ('1375', '10000008', '6104', '100', '0', '0', '0', '0', '4');
+INSERT INTO `user_pet` VALUES ('1376', '10000008', '6004', '100', '0', '0', '0', '0', '14');
+INSERT INTO `user_pet` VALUES ('1377', '10000008', '6115', '100', '0', '0', '0', '0', '8');
+INSERT INTO `user_pet` VALUES ('1378', '10000008', '6133', '100', '0', '0', '0', '0', '1');
+INSERT INTO `user_pet` VALUES ('1379', '10000008', '6113', '100', '0', '0', '0', '0', '1');
+INSERT INTO `user_pet` VALUES ('1380', '10000008', '6131', '100', '0', '0', '0', '0', '2');
+INSERT INTO `user_pet` VALUES ('1381', '10000003', '6115', '100', '0', '0', '0', '0', '4');
+INSERT INTO `user_pet` VALUES ('1382', '10000003', '6004', '100', '0', '1', '100000', '0', '14');
+INSERT INTO `user_pet` VALUES ('1383', '10000003', '6017', '100', '0', '0', '600000', '0', '2');
+INSERT INTO `user_pet` VALUES ('1384', '10000003', '6113', '100', '0', '0', '0', '0', '5');
+INSERT INTO `user_pet` VALUES ('1385', '10000003', '6005', '100', '0', '0', '0', '0', '7');
+INSERT INTO `user_pet` VALUES ('1386', '10000003', '6104', '100', '0', '0', '0', '0', '2');
+INSERT INTO `user_pet` VALUES ('1387', '10000003', '6131', '100', '0', '0', '0', '0', '1');
+INSERT INTO `user_pet` VALUES ('1388', '10000003', '6095', '100', '0', '0', '0', '0', '3');
+INSERT INTO `user_pet` VALUES ('1389', '10000003', '6140', '100', '0', '0', '0', '0', '1');
+INSERT INTO `user_pet` VALUES ('1390', '10000003', '6133', '100', '0', '0', '0', '0', '0');
+INSERT INTO `user_pet` VALUES ('1391', '10000008', '6006', '100', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for user_prop
@@ -295,19 +300,20 @@ CREATE TABLE `user_prop` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_prop_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=398 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_prop
 -- ----------------------------
-INSERT INTO `user_prop` VALUES ('385', '10000003', '1002', '8');
 INSERT INTO `user_prop` VALUES ('386', '10000003', '1003', '11');
-INSERT INTO `user_prop` VALUES ('388', '10000003', '2032', '4');
-INSERT INTO `user_prop` VALUES ('391', '10000003', '2022', '8');
-INSERT INTO `user_prop` VALUES ('393', '10000003', '1001', '5');
-INSERT INTO `user_prop` VALUES ('394', '10000003', '1004', '10');
-INSERT INTO `user_prop` VALUES ('395', '10000003', '2002', '3');
+INSERT INTO `user_prop` VALUES ('388', '10000003', '2032', '1');
+INSERT INTO `user_prop` VALUES ('391', '10000003', '2022', '2');
+INSERT INTO `user_prop` VALUES ('393', '10000003', '1001', '10');
+INSERT INTO `user_prop` VALUES ('394', '10000003', '1004', '4');
+INSERT INTO `user_prop` VALUES ('395', '10000003', '2002', '6');
 INSERT INTO `user_prop` VALUES ('397', '10000008', '1004', '4');
+INSERT INTO `user_prop` VALUES ('399', '10000003', '2001', '3');
+INSERT INTO `user_prop` VALUES ('400', '10000003', '2003', '3');
 
 -- ----------------------------
 -- Table structure for user_vs_rank
@@ -327,10 +333,10 @@ CREATE TABLE `user_vs_rank` (
   UNIQUE KEY `user_id` (`user_id`),
   KEY `integral` (`integral`) USING BTREE,
   CONSTRAINT `user_vs_rank_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_vs_rank
 -- ----------------------------
-INSERT INTO `user_vs_rank` VALUES ('254', '10000003', '玩家10000003', 'Texture/Icon/HeadPhoto/6901', '[6006,6115,6005,6104,6017,6004]', '[0,0,0,0,0,0]', '40003', '985', '2020-06-04 01:43:53');
 INSERT INTO `user_vs_rank` VALUES ('255', '10000008', '玩家10000008', 'Texture/Icon/HeadPhoto/6902', '[6140,6115,6095,6017,6104,6133]', '[100,0,0,0,0,0]', '123765', '1015', '2020-06-04 01:43:53');
+INSERT INTO `user_vs_rank` VALUES ('259', '10000003', '玩家10000003', 'Texture/Icon/HeadPhoto/6901', '[6113,6115,6005,6104,6017,6004]', '[0,0,0,0,100,44]', '111578', '1045', '2020-06-07 15:47:27');
