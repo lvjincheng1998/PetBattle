@@ -167,7 +167,6 @@ export default class PetPage extends cc.Component {
         for (let i = 0; i < skills.length; i++) {
             let skill = skills[i];
             this.skillListContent.children[i].getChildByName("Name").getComponent(cc.Label).string = (i + 1) + "、" + skill.name;
-            this.skillListContent.children[i].getChildByName("Name").getChildByName("EnergyValue").getComponent(cc.Label).string = skill.energy.toString();
             this.skillListContent.children[i].getChildByName("Introduce").getComponent(cc.Label).string = skill.explain;
         }
     }
