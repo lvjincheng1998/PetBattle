@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80020
 File Encoding         : 65001
 
-Date: 2020-06-11 17:40:04
+Date: 2020-06-27 09:28:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,23 +140,23 @@ CREATE TABLE `user_embattle` (
   KEY `user_pet_id` (`user_pet_id`),
   CONSTRAINT `user_embattle_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_embattle_ibfk_2` FOREIGN KEY (`user_pet_id`) REFERENCES `user_pet` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=543 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=554 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_embattle
 -- ----------------------------
-INSERT INTO `user_embattle` VALUES ('526', '10000003', '1384', '1');
-INSERT INTO `user_embattle` VALUES ('529', '10000003', '1383', '3');
-INSERT INTO `user_embattle` VALUES ('531', '10000003', '1389', '5');
 INSERT INTO `user_embattle` VALUES ('532', '10000008', '1391', '0');
 INSERT INTO `user_embattle` VALUES ('533', '10000008', '1375', '1');
 INSERT INTO `user_embattle` VALUES ('534', '10000008', '1374', '2');
 INSERT INTO `user_embattle` VALUES ('535', '10000008', '1378', '3');
 INSERT INTO `user_embattle` VALUES ('536', '10000008', '1376', '4');
 INSERT INTO `user_embattle` VALUES ('537', '10000008', '1371', '5');
-INSERT INTO `user_embattle` VALUES ('538', '10000003', '1386', '4');
-INSERT INTO `user_embattle` VALUES ('541', '10000003', '1387', '0');
-INSERT INTO `user_embattle` VALUES ('542', '10000003', '1381', '2');
+INSERT INTO `user_embattle` VALUES ('543', '10000003', '1381', '0');
+INSERT INTO `user_embattle` VALUES ('544', '10000003', '1383', '1');
+INSERT INTO `user_embattle` VALUES ('550', '10000003', '1389', '3');
+INSERT INTO `user_embattle` VALUES ('551', '10000003', '1387', '4');
+INSERT INTO `user_embattle` VALUES ('552', '10000003', '1386', '2');
+INSERT INTO `user_embattle` VALUES ('553', '10000003', '1384', '5');
 
 -- ----------------------------
 -- Table structure for user_equipment
@@ -248,7 +248,7 @@ CREATE TABLE `user_info` (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('10000003', '玩家10000003', '2', 'Texture/Icon/HeadPhoto/6901', '999643900', '503284', '100', '1067');
+INSERT INTO `user_info` VALUES ('10000003', '玩家10000003', '2', 'Texture/Icon/HeadPhoto/6901', '999643900', '503234', '100', '1082');
 INSERT INTO `user_info` VALUES ('10000008', '玩家10000008', '1', 'Texture/Icon/HeadPhoto/6902', '90000', '39924', '100', '993');
 
 -- ----------------------------
@@ -327,7 +327,7 @@ CREATE TABLE `user_prop` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `user_prop_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=404 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=405 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_prop
@@ -342,6 +342,7 @@ INSERT INTO `user_prop` VALUES ('399', '10000003', '2001', '18');
 INSERT INTO `user_prop` VALUES ('400', '10000003', '2003', '21');
 INSERT INTO `user_prop` VALUES ('401', '10000003', '1002', '5');
 INSERT INTO `user_prop` VALUES ('403', '10000003', '1021', '2');
+INSERT INTO `user_prop` VALUES ('404', '10000003', '1011', '1');
 
 -- ----------------------------
 -- Table structure for user_vs_rank
@@ -361,10 +362,10 @@ CREATE TABLE `user_vs_rank` (
   UNIQUE KEY `user_id` (`user_id`),
   KEY `integral` (`integral`) USING BTREE,
   CONSTRAINT `user_vs_rank_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_vs_rank
 -- ----------------------------
-INSERT INTO `user_vs_rank` VALUES ('262', '10000003', '玩家10000003', 'Texture/Icon/HeadPhoto/6901', '[6131,6113,6115,6017,6104,6140]', '[100,100,100,100,100,100]', '481850', '1067', '2020-06-09 12:38:19');
 INSERT INTO `user_vs_rank` VALUES ('263', '10000008', '玩家10000008', 'Texture/Icon/HeadPhoto/6902', '[6006,6104,6005,6133,6004,6095]', '[100,100,100,100,100,100]', '414438', '993', '2020-06-09 12:38:19');
+INSERT INTO `user_vs_rank` VALUES ('266', '10000003', '玩家10000003', 'Texture/Icon/HeadPhoto/6901', '[6115,6017,6095,6140,6131,6004]', '[100,100,100,100,100,100]', '480305', '1082', '2020-06-27 09:17:53');

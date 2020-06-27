@@ -28,12 +28,12 @@ export default class NewClass extends cc.Component {
         cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
         this.checkRemember();
 
-        let url = "ws://192.168.101.14:9999/petBattleServer";
+        let url = "ws://127.0.0.1:9999/petBattleServer";
         JCEngine.boot(url, Player);
 
         //if local test, suport input username and password by q or w
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, (event: cc.Event.EventKeyboard) => {
-            if (!url.startsWith("ws://192.168")) {
+            if (!url.startsWith("ws://127.0.0.1")) {
                 return;
             }
             if (event.keyCode == cc.macro.KEY.q) {

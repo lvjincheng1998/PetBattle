@@ -3,7 +3,7 @@ export class JCEngine {
 
     public static boot(url: string, entityClass: new() => JCEntity) {
         JCEngine.entityClass = entityClass;
-        WebSocketServer.run(url);
+        new WebSocketServer(url);
     }
 }
 
@@ -54,10 +54,10 @@ class JCChannel {
 }
 
 class WebSocketServer {
-    private static webSocket: WebSocket;
-    private static tempEntity: JCEntity;
+    private webSocket: WebSocket;
+    private tempEntity: JCEntity;
 
-    public static run(url: string) {
+    constructor(url: string) {
         if (this.webSocket && this.webSocket.OPEN) {
             this.webSocket.close();
         }
@@ -76,7 +76,7 @@ class WebSocketServer {
         }
     }
 
-    private static call(func: string, args?: any[]) {
+    private call(func: string, args?: any[]) {
         if (args == undefined) {
             args = [];
         }
@@ -84,7 +84,7 @@ class WebSocketServer {
         this.webSocket.send(JSON.stringify(data));
     }
 
-    private static invoke(data: JCData) {
+    private invoke(data: JCData) {
         if (data.type == JCDataType.EVENT) {
             this[data.func].apply(this, data.args);
             return;
@@ -100,7 +100,7 @@ class WebSocketServer {
         }
     }
 
-    public static loadTempEntity(id: number) {
+    public loadTempEntity(id: number) {
         this.tempEntity = new JCEngine.entityClass();
         this.tempEntity.id = id;
         this.tempEntity.channel = new JCChannel(this.webSocket);
@@ -108,7 +108,7 @@ class WebSocketServer {
         this.tempEntity.onLoad();
     }
 
-    public static destroyTempEntity() {
+    public destroyTempEntity() {
         this.tempEntity.isValid = false;
         this.tempEntity.onDestroy(); 
     }
@@ -120,7 +120,7 @@ class CallbackManager {
     public static addCallback(uuid: string, callback: Function) {
         if (callback instanceof Function) {
             this.mapper.set(uuid, {
-                method: callback, 
+                callback: callback, 
                 deadTime: Date.now() + 10 * 1000
             });            
         }
@@ -129,25 +129,24 @@ class CallbackManager {
     public static handleCallback(data: JCData) {
         if (this.mapper.size > 10) {
             let now = Date.now();
-            for (let item of this.mapper) {
-                if (now >= item[1].deadTime) {
-                    this.mapper.delete(item[0]);
+            for (let item of (this.mapper as any)) {
+                let key = item[0].deadTime;
+                let value = item[1];
+                if (now >= value.deadTime) {
+                    this.mapper.delete(key);
                 }
             }
         }
         let callbackInfo = this.mapper.get(data.uuid);
-        if (!callbackInfo) {
-            return;
-        }
-        if (callbackInfo.method instanceof Function) {
+        if (callbackInfo && callbackInfo.callback instanceof Function) {
             this.mapper.delete(data.uuid);
-            callbackInfo.method(data.args[0]);
+            callbackInfo.callback(data.args[0]);
         }
     }
 } 
 
 class JCUtil {
-    
+
     public static uuid(): string {
         let arr = [];
         let hexDigits = "0123456789abcdef";
@@ -162,7 +161,7 @@ class JCUtil {
 }
 
 interface CallbackInfo {
-    method: Function;
+    callback: Function;
     deadTime: number;
 }
 
