@@ -3,15 +3,14 @@ package game;
 import java.util.ArrayList;
 import java.util.Random;
 import com.alibaba.fastjson.JSONArray;
-
 import bean.UserVsRank;
 import controller.RankController;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
-import pers.jc.util.JCInterval;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
+import pers.jc.util.JCTimer;
 import result.BattleVsResult;
 
-@Controller
+@SocketComponent("BattleMgr")
 public class BattleMgr {
 	static ArrayList<Player> matchingList = new ArrayList<Player>();
 	Player player1;
@@ -19,32 +18,30 @@ public class BattleMgr {
 	JSONArray res1 = null;
 	JSONArray res2 = null;
 	Random random = new Random();
-	JCInterval interval;
+	JCTimer frameSyncTimer;
 	
 	private static String lockMatch = "lockMatch";
 	
 	public static void init() {
-		new JCInterval(1) {
-			@Override
-			public void run() {
-				synchronized (lockMatch) {
-					long now = System.currentTimeMillis();
-					for (int i = matchingList.size() - 1; i >= 0; i--) {
-						Player player = matchingList.get(i);
-						if (player.isValid) {
-							if (now - player.matchStartTime >= 5 * 1000) {
-								matchingList.remove(i);
-								new BattleMgr().matchSuccess(player, player);
-							}
-						} else {
+		new JCTimer().loop(() -> {
+			synchronized (lockMatch) {
+				long now = System.currentTimeMillis();
+				for (int i = matchingList.size() - 1; i >= 0; i--) {
+					Player player = matchingList.get(i);
+					if (player.isValid) {
+						if (now - player.matchStartTime >= 5 * 1000) {
 							matchingList.remove(i);
+							new BattleMgr().matchSuccess(player, player);
 						}
+					} else {
+						matchingList.remove(i);
 					}
 				}
 			}
-		};
+		}, 1000);
 	}
 	
+	@SocketMethod
 	public static void match(Player player, JSONArray embattle) {
 		synchronized (lockMatch) {
 			player.embattle = embattle;
@@ -56,14 +53,8 @@ public class BattleMgr {
 				if (!matchingPlayer.isValid) {
 					continue;
 				}
-				if (Math.abs(
-						player.userInfo.getIntegral() - 
-						matchingPlayer.userInfo.getIntegral()
-					) <= 100
-				) {
-					matchPlayer = matchingPlayer;
-					matchingList.remove(i);
-				}
+				matchPlayer = matchingPlayer;
+				matchingList.remove(i);
 			}
 			
 			if (matchPlayer == null) {
@@ -97,18 +88,15 @@ public class BattleMgr {
 	}
 	
 	private void openFrameSync() {
-		player1.call("setFrameRate", 30);
-		player2.call("setFrameRate", 30);
-		interval = new JCInterval(0.033) {
-			@Override
-			public void run() {
-				if (!player1.isValid && !player2.isValid) {
-					cancel();
-				} else {
-					step();
-				}
+		player1.call("setFrameRate", 60);
+		player2.call("setFrameRate", 60);
+		frameSyncTimer = new JCTimer().loop(() -> {
+			if (!player1.isValid && !player2.isValid) {
+				frameSyncTimer.cancel();
+			} else {
+				step();
 			}
-		};
+		}, 16);
 	}
 	
 	private void step() {
@@ -143,8 +131,8 @@ public class BattleMgr {
 		if (player == player1) {
 			res1 = res;
 			if (!player2.isValid) {
-				if (interval != null) {
-					interval.cancel();
+				if (frameSyncTimer != null) {
+					frameSyncTimer.cancel();
 				}
 				calculateIntegral(res);
 				return;
@@ -153,16 +141,16 @@ public class BattleMgr {
 		if (player == player2) {
 			res2 = res;
 			if (!player1.isValid) {
-				if (interval != null) {
-					interval.cancel();
+				if (frameSyncTimer != null) {
+					frameSyncTimer.cancel();
 				}
 				calculateIntegral(res);
 				return;
 			}
 		}
 		if (res1 != null && res2 != null) {
-			if (interval != null) {
-				interval.cancel();
+			if (frameSyncTimer != null) {
+				frameSyncTimer.cancel();
 			}
 			if (
 				res1.getInteger(0) == res2.getInteger(0) && 
@@ -215,14 +203,15 @@ public class BattleMgr {
 		if (changed) {
 			player1.userVsRank.setIntegral(player1.userInfo.getIntegral());
 			setUserVsRank(player1.userVsRank);
-			CURD.update(player1.userInfo);
+			DB.curd.update(player1.userInfo);
 			if (otherIsPlayer()) {
 				player2.userVsRank.setIntegral(player2.userInfo.getIntegral());
 				setUserVsRank(player2.userVsRank);
-				CURD.update(player2.userInfo);
+				DB.curd.update(player2.userInfo);
 			}
 		}
 	}
+	
 	
 	public void setUserVsRank(UserVsRank userVsRank) {
 		new Thread(new Runnable() {

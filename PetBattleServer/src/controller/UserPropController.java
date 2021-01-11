@@ -5,22 +5,25 @@ import java.util.List;
 import bean.ShopGoods;
 import bean.UserInfo;
 import bean.UserProp;
+import game.DB;
 import game.Player;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.RequestResult;
 
-@Controller
+@SocketComponent("UserPropController")
 public class UserPropController {
 
+	@SocketMethod
 	public List<UserProp> getProps(Player player) {
-		return CURD.select(UserProp.class, new SQL(){{
+		return DB.curd.select(UserProp.class, new SQL(){{
 			WHERE("user_id=" + player.userInfo.getId());
 		}});
 	}
 	
+	@SocketMethod
 	public static RequestResult sell(Player player, UserProp[] userProps) {
 		RequestResult requestResult = new RequestResult();
 		UserInfo userInfo = (UserInfo) player.userInfo.clone();
@@ -34,7 +37,7 @@ public class UserPropController {
 				userInfo.setDiamond(userInfo.getDiamond() + sell_price * userProp.getAmount());
 			}
 		}
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				if (update(userInfo) == 1) {
@@ -66,8 +69,9 @@ public class UserPropController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static boolean addProp(Transaction transaction, UserProp prop, RequestResult requestResult) throws Exception {
-		UserProp userProp = CURD.selectOne(UserProp.class, new SQL(){{
+		UserProp userProp = DB.curd.selectOne(UserProp.class, new SQL(){{
 			WHERE("user_id=" + prop.getUser_id());
 			WHERE("prop_id=" + prop.getProp_id());
 		}});
@@ -87,8 +91,9 @@ public class UserPropController {
 		return false;
 	}
 	
+	@SocketMethod
 	public static boolean subProp(Transaction transaction, UserProp prop, RequestResult requestResult) throws Exception {
-		UserProp userProp = CURD.selectOne(UserProp.class, new SQL(){{
+		UserProp userProp = DB.curd.selectOne(UserProp.class, new SQL(){{
 			WHERE("user_id=" + prop.getUser_id());
 			WHERE("prop_id=" + prop.getProp_id());
 		}});

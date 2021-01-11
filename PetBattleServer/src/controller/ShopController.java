@@ -6,22 +6,22 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-
 import bean.ShopGoods;
 import bean.UserEquipment;
 import bean.UserInfo;
 import bean.UserPet;
 import bean.UserProp;
+import game.DB;
 import game.Player;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.BuyGoodsResult;
 import result.RequestResult;
 import result.ShopGoodsResult;
 
-@Controller
+@SocketComponent("ShopController")
 public class ShopController {
 	static List<ShopGoods> goodsList = null;
 	static long nextRefreshTime = 0;
@@ -40,7 +40,7 @@ public class ShopController {
 	
 	public static void refresh() {
 		int interval = 3 * 60 * 60;
-		List<ShopGoods> total_list = CURD.selectAll(ShopGoods.class);
+		List<ShopGoods> total_list = DB.curd.selectAll(ShopGoods.class);
 		total_list.sort(new Comparator<ShopGoods>() {
 			@Override
 			public int compare(ShopGoods o1, ShopGoods o2) {
@@ -63,6 +63,7 @@ public class ShopController {
 		nextRefreshTime = System.currentTimeMillis() + interval * 1000;
 	}
 	
+	@SocketMethod
 	public static RequestResult getGoodsList() {
 		ShopGoodsResult shopGoodsResult = new ShopGoodsResult();
 		shopGoodsResult.setNextRefreshTime(nextRefreshTime);
@@ -74,6 +75,7 @@ public class ShopController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static ShopGoods getGoods(int goods_id) {
 		for (ShopGoods shopGoods : goodsList) {
 			if (shopGoods.getGoods_id() == goods_id) {
@@ -83,6 +85,7 @@ public class ShopController {
 		return null;
 	}
 	
+	@SocketMethod
 	public static synchronized RequestResult buyGoods(Player player, String uuid) {
 		RequestResult requestResult = new RequestResult();
 		ShopGoods tempShopGoods = null;
@@ -121,7 +124,7 @@ public class ShopController {
 		userProp.setUser_id(userInfo.getId());
 		userProp.setProp_id(shopGoods.getGoods_id());
 		userProp.setAmount(shopGoods.getSingle_buy());
-		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+		UserPet userPet = DB.curd.selectOne(UserPet.class, new SQL(){{
 			WHERE("user_id=" + PARAM(userInfo.getId()));
 			WHERE("pet_id=" + PARAM(shopGoods.getGoods_id()));
 		}});
@@ -139,7 +142,7 @@ public class ShopController {
 		BuyGoodsResult buyGoodsResult = new BuyGoodsResult();
 		buyGoodsResult.setUserInfo(userInfo);
 		buyGoodsResult.setGoods_type(shopGoods.getGoods_type());
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				update(userInfo);

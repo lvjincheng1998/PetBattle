@@ -1,14 +1,14 @@
 package bean;
 
+import pers.jc.sql.AutoIncrement;
 import pers.jc.sql.Column;
-import pers.jc.sql.GeneratedValue;
 import pers.jc.sql.Id;
 import pers.jc.sql.Table;
 
 @Table("friend_mapper")
 public class FriendMapper {
 	@Id
-	@GeneratedValue
+	@AutoIncrement
 	public int id;
 	@Column
 	public int inviter_id;

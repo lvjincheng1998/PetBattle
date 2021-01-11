@@ -3,12 +3,11 @@ package game;
 import controller.ShopController;
 import controller.UserEquipmentController;
 import pers.jc.engine.JCEngine;
-import pers.jc.sql.CURD;
 
 public class Boot {
 	
 	public static void main(String[] args) throws Exception {
-		CURD.init();
+		DB.init();
 		BattleMgr.init();
 		ShopController.init();
 		UserEquipmentController.init();

@@ -3,18 +3,20 @@ package controller;
 import java.util.Random;
 import bean.UserInfo;
 import bean.UserLogin;
+import game.DB;
 import game.Player;
-import pers.jc.engine.JCManager;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import game.PlayerMgr;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import pers.jc.util.JCLogger;
 import result.RequestResult;
 
-@Controller
+@SocketComponent("UserController")
 public class UserController {
 	
+	@SocketMethod
 	public static RequestResult login(Player player, String username, String password) {
 		try {
 			Thread.sleep(1000);
@@ -22,7 +24,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		RequestResult requestResult = new RequestResult();
-		UserLogin userLogin = CURD.selectOne(UserLogin.class, new SQL(){{
+		UserLogin userLogin = DB.curd.selectOne(UserLogin.class, new SQL(){{
 			WHERE("username=" + PARAM(username));
 		}});
 		if (userLogin == null) {
@@ -33,18 +35,18 @@ public class UserController {
 			requestResult.setMsg("账号密码不匹配");
 			return requestResult; 
 		}
-		UserInfo userInfo = CURD.selectOne(UserInfo.class, new SQL(){{
+		UserInfo userInfo = DB.curd.selectOne(UserInfo.class, new SQL(){{
 			WHERE("id=" + PARAM(userLogin.getId()));
 		}});
 		if (userInfo == null) {
 			requestResult.setMsg("用户信息获取失败");
 		} else {
 			synchronized ("login") {
-				Player user = (Player) JCManager.getEntityById(userInfo.getId());
+				Player user = (Player) PlayerMgr.get(userInfo.getId());
 				if (user == null) {
 					player.id = userInfo.getId();
 					player.userInfo = userInfo;
-					JCManager.addEntity(player);
+					PlayerMgr.add(player);
 					requestResult.setCode(200);
 					requestResult.setData(userInfo);
 					requestResult.setMsg("登录成功");
@@ -57,9 +59,10 @@ public class UserController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public RequestResult register(String username, String password) {
 		RequestResult requestResult = new RequestResult();
-		UserLogin userLogin = CURD.selectOne(UserLogin.class, new SQL(){{
+		UserLogin userLogin = DB.curd.selectOne(UserLogin.class, new SQL(){{
 			WHERE("username=" + PARAM(username));
 		}});
 		if (userLogin != null) {
@@ -67,7 +70,7 @@ public class UserController {
 			return requestResult;
 		}
 		UserInfo user_info = new UserInfo();
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				UserLogin user_login = new UserLogin();

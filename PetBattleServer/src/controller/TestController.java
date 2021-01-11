@@ -1,10 +1,12 @@
 package controller;
 
-import pers.jc.mvc.Controller;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 
-@Controller
+@SocketComponent("TestController")
 public class TestController {
 	
+	@SocketMethod
 	public void test(int a) {
 		System.out.println(a);
 	}

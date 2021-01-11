@@ -2,13 +2,13 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import bean.UserInfo;
 import bean.UserPet;
 import bean.UserProp;
+import game.DB;
 import game.Player;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.RequestResult;
@@ -16,11 +16,12 @@ import result.UserPetBloodUpResult;
 import result.UserPetBreakUpResult;
 import result.UserPetLevelUpResult;
 
-@Controller
+@SocketComponent("UserPetController")
 public class UserPetController {
 	
+	@SocketMethod
 	public RequestResult getUserPets(Player player) {
-		ArrayList<UserPet> list = CURD.select(UserPet.class, new SQL(){{
+		ArrayList<UserPet> list = DB.curd.select(UserPet.class, new SQL(){{
 			WHERE("user_id=" + PARAM(player.id));
 		}});
 		RequestResult requestResult = new RequestResult();
@@ -30,9 +31,10 @@ public class UserPetController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public RequestResult levelUp(Player player, int user_pet_id, int prop_id) {
 		RequestResult requestResult = new RequestResult();
-		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+		UserPet userPet = DB.curd.selectOne(UserPet.class, new SQL(){{
 			WHERE("id=" + user_pet_id);
 		}});
 		if (userPet == null) {
@@ -61,7 +63,7 @@ public class UserPetController {
 			userProp.setUser_id(player.userInfo.getId());
 			userProp.setProp_id(prop_id);
 			userProp.setAmount(1);
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					if (UserPropController.subProp(this, userProp, requestResult)) {
@@ -87,9 +89,10 @@ public class UserPetController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public RequestResult bloodUp(Player player, int user_pet_id) {
 		RequestResult requestResult = new RequestResult();
-		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+		UserPet userPet = DB.curd.selectOne(UserPet.class, new SQL(){{
 			WHERE("id=" + user_pet_id);
 		}});
 		if (userPet == null) {
@@ -119,7 +122,7 @@ public class UserPetController {
 			userProp.setUser_id(player.userInfo.getId());
 			userProp.setProp_id(1011);
 			userProp.setAmount(1);
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					if (UserPropController.subProp(this, userProp, requestResult)) {
@@ -145,9 +148,10 @@ public class UserPetController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public RequestResult breakUp(Player player, int user_pet_id) {
 		RequestResult requestResult = new RequestResult();
-		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+		UserPet userPet = DB.curd.selectOne(UserPet.class, new SQL(){{
 			WHERE("id=" + user_pet_id);
 		}});
 		if (userPet == null) {
@@ -163,7 +167,7 @@ public class UserPetController {
 			userProp.setProp_id(1021);
 			userProp.setAmount(userPet.getBreak_level() + 1);
 			userPet.setBreak_level(userPet.getBreak_level() + 1);
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					if (

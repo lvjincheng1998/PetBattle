@@ -3,16 +3,15 @@ package controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
 import bean.UserEquipment;
 import bean.UserInfo;
 import bean.UserProp;
+import game.DB;
 import game.Player;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.RequestResult;
@@ -20,19 +19,20 @@ import result.UserEquipmentStarUpResult;
 import result.UserEquipmentStrengthUpResult;
 import result.UserEquipmentWashResult;
 
-@Controller
+@SocketComponent("UserEquipmentController")
 public class UserEquipmentController {
 	
+	@SocketMethod
 	public RequestResult equipEquipment(int user_pet_id, int user_equipment_id) {
 		RequestResult requestResult = new RequestResult();
-		UserEquipment userEquipment = CURD.selectOne(UserEquipment.class, new SQL(){{
+		UserEquipment userEquipment = DB.curd.selectOne(UserEquipment.class, new SQL(){{
 			WHERE("id=" + user_equipment_id);
 		}});
 		if (userEquipment == null) {
 			requestResult.setMsg("装备不存在");
 		}
 		userEquipment.setUser_pet_id(user_pet_id);
-		int updateCount = CURD.update(userEquipment);
+		int updateCount = DB.curd.update(userEquipment);
 		if (updateCount == 1) {
 			requestResult.setCode(200);
 			requestResult.setData(userEquipment);
@@ -43,16 +43,17 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public RequestResult removeEquipment(int user_equipment_id) {
 		RequestResult requestResult = new RequestResult();
-		UserEquipment userEquipment = CURD.selectOne(UserEquipment.class, new SQL(){{
+		UserEquipment userEquipment = DB.curd.selectOne(UserEquipment.class, new SQL(){{
 			WHERE("id=" + user_equipment_id);
 		}});
 		if (userEquipment == null) {
 			requestResult.setMsg("装备不存在");
 		}
 		userEquipment.setUser_pet_id(0);
-		int updateCount = CURD.update(userEquipment);
+		int updateCount = DB.curd.update(userEquipment);
 		if (updateCount == 1) {
 			requestResult.setCode(200);
 			requestResult.setData(userEquipment);
@@ -63,6 +64,7 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static RequestResult strengthUp(
 		Player player, 
 		int user_equipment_id, 
@@ -71,7 +73,7 @@ public class UserEquipmentController {
 		int coin
 	) {
 		RequestResult requestResult = new RequestResult();
-		UserEquipment userEquipment = CURD.selectOne(UserEquipment.class, new SQL(){{
+		UserEquipment userEquipment = DB.curd.selectOne(UserEquipment.class, new SQL(){{
 			WHERE("id=" + PARAM(user_equipment_id));
 		}});
 		if (userEquipment == null) {
@@ -93,7 +95,7 @@ public class UserEquipmentController {
 				requestResult.setMsg("强化等级已满");
 				return requestResult;
 			}
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					if (UserPropController.subProp(this, userProp, requestResult) && update(userInfo) == 1) {
@@ -121,6 +123,7 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static RequestResult starUp(
 			Player player, 
 			int user_equipment_id, 
@@ -129,7 +132,7 @@ public class UserEquipmentController {
 			int coin
 	) {
 		RequestResult requestResult = new RequestResult();
-		UserEquipment userEquipment = CURD.selectOne(UserEquipment.class, new SQL(){{
+		UserEquipment userEquipment = DB.curd.selectOne(UserEquipment.class, new SQL(){{
 			WHERE("id=" + PARAM(user_equipment_id));
 		}});
 		if (userEquipment == null) {
@@ -151,7 +154,7 @@ public class UserEquipmentController {
 				requestResult.setMsg("星痕等级已满");
 				return requestResult;
 			}
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					if (UserPropController.subProp(this, userProp, requestResult) && update(userInfo) == 1) {
@@ -179,6 +182,7 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static RequestResult wash(
 			Player player, 
 			int user_equipment_id, 
@@ -187,7 +191,7 @@ public class UserEquipmentController {
 			int coin
 	) {
 		RequestResult requestResult = new RequestResult();
-		UserEquipment userEquipment = CURD.selectOne(UserEquipment.class, new SQL(){{
+		UserEquipment userEquipment = DB.curd.selectOne(UserEquipment.class, new SQL(){{
 			WHERE("id=" + PARAM(user_equipment_id));
 		}});
 		if (userEquipment == null) {
@@ -225,7 +229,7 @@ public class UserEquipmentController {
 				viceStatus.put(viceStatusName, viceStatusValue);
 			}
 			userEquipment.setVice_status(viceStatus.toString());
-			new Transaction() {
+			new Transaction(DB.curd.getAccess()) {
 				@Override
 				public void run() throws Exception {
 					boolean sub_success = true;
@@ -259,6 +263,7 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static RequestResult sell(Player player, UserEquipment[] userEquipments) {
 		RequestResult requestResult = new RequestResult();
 		UserInfo userInfo = (UserInfo) player.userInfo.clone();
@@ -276,7 +281,7 @@ public class UserEquipmentController {
 				userInfo.setDiamond(userInfo.getDiamond() + 100);
 			}
 		}
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				if (update(userInfo) == 1 && delete(userEquipments) == userEquipments.length) {
@@ -300,12 +305,14 @@ public class UserEquipmentController {
 		return requestResult;
 	}
 	
+	@SocketMethod
 	public static ArrayList<UserEquipment> getUserEquipments(Player player) {
-		return CURD.select(UserEquipment.class, new SQL(){{
+		return DB.curd.select(UserEquipment.class, new SQL(){{
 			WHERE("user_id=" + player.userInfo.getId());
 		}});
 	}
 	
+	@SocketMethod
 	public static UserEquipment generateUserEquipment(Transaction transaction, UserEquipment userEquipment) throws Exception {
 		createUserEquipment(userEquipment);
 		transaction.insertAndGenerateKeys(userEquipment);
@@ -352,6 +359,7 @@ public class UserEquipmentController {
 		viceStatusRangeMap.put("resist", new int[] {5, 10});
 	}
 	
+	@SocketMethod
 	public static UserEquipment createUserEquipment(UserEquipment userEquipment) {
 		String equipmentName = getEquipmentNameById(userEquipment.getEquipment_id());
 		String rarity = getEquipmentRarityById(userEquipment.getEquipment_id());

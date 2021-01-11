@@ -3,15 +3,16 @@ package controller;
 import java.util.Random;
 import bean.UserInfo;
 import bean.UserPet;
+import game.DB;
 import game.Player;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 import result.GashaponResult;
 import result.RequestResult;
 
-@Controller
+@SocketComponent("GashaponController")
 public class GashaponController {
 	static int[] R = new int[] {6004};
 	static int[] SR = new int[] {6005};
@@ -20,6 +21,7 @@ public class GashaponController {
 	
 	public Random random = new Random();
 	
+	@SocketMethod
 	public RequestResult excuteGashapon(Player player, int type) {
 		RequestResult requestResult = new RequestResult();
 		UserInfo userInfo = (UserInfo) player.userInfo.clone();
@@ -80,7 +82,7 @@ public class GashaponController {
 			}
 		}
 		int pet_id_copy = pet_id;
-		UserPet userPet = CURD.selectOne(UserPet.class, new SQL(){{
+		UserPet userPet = DB.curd.selectOne(UserPet.class, new SQL(){{
 			WHERE("user_id=" + PARAM(userInfo.getId()));
 			WHERE("pet_id=" + PARAM(pet_id_copy));
 		}});
@@ -92,7 +94,7 @@ public class GashaponController {
 			userPet.setFragment(userPet.getFragment() + 1);
 		}
 		UserPet userPet_copy = userPet;
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				update(userInfo);

@@ -1,17 +1,20 @@
 package controller;
 
 import java.util.ArrayList;
+
 import bean.UserVsRank;
-import pers.jc.mvc.Controller;
-import pers.jc.sql.CURD;
+import game.DB;
+import pers.jc.network.SocketComponent;
+import pers.jc.network.SocketMethod;
 import pers.jc.sql.SQL;
 import pers.jc.sql.Transaction;
 
-@Controller
+@SocketComponent("RankController")
 public class RankController {
 	
+	@SocketMethod
 	public static synchronized void addRank(UserVsRank userVsRank) {
-		new Transaction() {
+		new Transaction(DB.curd.getAccess()) {
 			@Override
 			public void run() throws Exception {
 				delete(new SQL() {{
@@ -24,8 +27,9 @@ public class RankController {
 		};
 	}
 	
+	@SocketMethod
 	public ArrayList<UserVsRank> getRanks() {
-		return CURD.select(UserVsRank.class, new SQL(){{
+		return DB.curd.select(UserVsRank.class, new SQL(){{
 			ORDER_BY("integral DESC");
 			ORDER_BY("create_time");
 			LIMIT("30");

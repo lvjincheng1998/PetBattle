@@ -1,6 +1,3 @@
-import { JCEngine } from "../SDK/JCEngine";
-import Player from "../Player/Player";
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass

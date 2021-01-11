@@ -1,14 +1,14 @@
 package bean;
 
+import pers.jc.sql.AutoIncrement;
 import pers.jc.sql.Column;
-import pers.jc.sql.GeneratedValue;
 import pers.jc.sql.Id;
 import pers.jc.sql.Table;
 
 @Table("user_equipment")
 public class UserEquipment {
 	@Id
-	@GeneratedValue
+	@AutoIncrement
 	private int id;
 	@Column
 	private int user_id;
