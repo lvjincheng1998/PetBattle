@@ -8,7 +8,7 @@
 
 ### 客户端说明
 使用Cocos Creator-2.3.3打开项目PetBattleClient。
-找到LoginMgr.ts文件，修改连接后台的URL。
+可在LoginMgr.ts中修改连接后台的URL。
 
 已有测试账号：
 账号 | 密码
