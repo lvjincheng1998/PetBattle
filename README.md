@@ -20,5 +20,3 @@ asdfgh | asdfgh
 
 ### 服务端说明
 推荐使用Eclipse打开项目PetBattleServer。
-
-###### 有问题联系作者：2811605723@qq.com
