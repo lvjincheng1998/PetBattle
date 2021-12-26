@@ -19,4 +19,4 @@ asdfgh | asdfgh
 注意：要先运行服务端再运行客户端，否则会报连接错误。
 
 ### 服务端说明
-推荐使用Eclipse打开项目PetBattleServer。
+推荐使用Eclipse打开项目PetBattleServer，运行game.Boot.java。
